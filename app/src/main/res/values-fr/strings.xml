@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mobility Rate Calculator</string>
+    <string name="calculate_distance">Calculer la distance</string>
+    <string name="calculating">Calcul en cours</string>
+    <string name="cancel">Annuler</string>
+    <string name="category">Catégorie</string>
+    <string name="confirm">Confirmer</string>
+    <string name="connexion_error">Erreur de connexion</string>
+    <string name="distance">Distance</string>
+    <string name="distance_format">Distance totale : %d km</string>
+    <string name="find_itinerary">Trouver un itinéraire</string>
+    <string name="from">De</string>
+    <string name="from_format">De : %s</string>
+    <string name="hours_during_the_day">Heures durant la journée</string>
+    <string name="hours_during_the_night">Heures durant la nuit</string>
+    <string name="invalid_request">Requête invalide</string>
+    <string name="itinerary">Itinéraire</string>
+    <string name="kilometers">Kilomètres</string>
+    <string name="kilometers_count">%d kilomètres</string>
+    <string name="no_result_found">Aucun résultat trouvé</string>
+    <string name="one_way">Aller seulement</string>
+    <string name="prices">Prix</string>
+    <string name="set_itinerary">Entrer un itinéraire</string>
+    <string name="time">Durée</string>
+    <string name="to">À</string>
+    <string name="to_format">À : %s</string>
+    <string name="total">Total</string>
+    <string name="two_way">Aller-Retour</string>
+</resources>

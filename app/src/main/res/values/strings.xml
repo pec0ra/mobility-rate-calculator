@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Mobility Rate Calculator</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="category">Category</string>
+    <string name="total">Total</string>
+    <string name="time">Time</string>
+    <string name="distance">Distance</string>
+    <string name="prices">Prices</string>
+
+
+    <string name="set_itinerary">Get from Itinerary</string>
+    <string name="find_itinerary">Find itinerary</string>
+    <string name="calculate_distance">Calculate distance</string>
+    <string name="itinerary">Itinerary</string>
+    <string name="calculating">Calculating</string>
+    <string name="two_way">Two-way</string>
+
+    <string name="ok" translatable="false">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="one_way">One way</string>
+
+    <string name="connexion_error">Connection error</string>
+    <string name="no_result_found">No result found</string>
+    <string name="invalid_request">Invalid request</string>
+
+
+    <string name="kilometers_count">%d kilometers</string>
+    <string name="chf" translatable="false">%s CHF</string>
+    <string name="from_format">From : %s</string>
+    <string name="to_format">To : %s</string>
+    <string name="distance_format">Total distance : %d km</string>
+    <string name="hours_during_the_day">Hours during the day</string>
+    <string name="hours_during_the_night">Hours during the night</string>
+
+
+    <string name="budget" translatable="false">Budget</string>
+    <string name="micro" translatable="false">Micro</string>
+    <string name="economy" translatable="false">Economy</string>
+    <string name="electro" translatable="false">Electro</string>
+    <string name="combi" translatable="false">Combi</string>
+    <string name="cabrio" translatable="false">Cabrio</string>
+    <string name="emotion" translatable="false">Emotion</string>
+    <string name="minivan" translatable="false">Minivan</string>
+    <string name="transport" translatable="false">Transport</string>
+</resources>
