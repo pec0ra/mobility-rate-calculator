@@ -65,4 +65,5 @@
     <string name="emotion" translatable="false">Emotion</string>
     <string name="minivan" translatable="false">Minivan</string>
     <string name="transport" translatable="false">Transport</string>
+    <string name="to_time">To</string>
 </resources>

@@ -46,4 +46,5 @@
     <string name="to_format">À : %s</string>
     <string name="total">Total</string>
     <string name="two_way">Aller-Retour</string>
+    <string name="to_time">À</string>
 </resources>
