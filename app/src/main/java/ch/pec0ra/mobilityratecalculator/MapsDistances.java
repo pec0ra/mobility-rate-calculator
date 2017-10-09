@@ -8,25 +8,22 @@
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
  *
- *     Foobar is distributed in the hope that it will be useful,
+ *     Mobility Rate Calculator is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package ch.pec0ra.mobilityratecalculator;
 
-/**
- * Created by basile on 26.09.16.
- */
 
 public class MapsDistances {
-    public static String distancesKey = "";
-    public static String directionsKey = "";
-    public static String staticMapKey = "";
+    public static String distancesKey = "AIzaSyDsNSGBn4OAXW2aXiBM82vqfCza5KuslVY";
+    public static String directionsKey = "AIzaSyCfB4h_sgRiCkhVGKuOfwZbN7WDzL9lvqU";
+    public static String staticMapKey = "AIzaSyCFeBY1xZaiTcJMeHZFSdkDadzbo2zB4dg";
 
     public static final String BASE_DISTANCES_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
     public static final String ORIGINS = "origins=";

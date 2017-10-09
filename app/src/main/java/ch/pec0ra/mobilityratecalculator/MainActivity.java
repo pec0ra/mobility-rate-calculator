@@ -8,13 +8,13 @@
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
  *
- *     Foobar is distributed in the hope that it will be useful,
+ *     Mobility Rate Calculator is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package ch.pec0ra.mobilityratecalculator;
@@ -96,6 +96,33 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
 
     }
 
+    @Override
+    protected void onResume() {
+        Calendar today = Calendar.getInstance();
+        Calendar december6 = Calendar.getInstance();
+        december6.set(2017, 12, 6);
+
+        if(today.compareTo(december6) >= 0){
+            showWarning();
+        }
+        super.onResume();
+    }
+
+    private void showWarning(){
+        final View warningView = findViewById(R.id.app_obsolete_warning);
+        warningView.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    warningView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
 
     private class MyClickListener implements View.OnClickListener {
 
@@ -190,7 +217,13 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
     }
 
     private void startCalculateJob() {
-        int kms = Integer.parseInt(kmInput.getText().toString());
+        int kms = 0;
+        try {
+            kms = Integer.parseInt(kmInput.getText().toString());
+        } catch(NumberFormatException e){
+            kmInput.setError(getString(R.string.wrong_format));
+            return;
+        }
         final RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms);
 
         startLoad(getString(R.string.calculating));

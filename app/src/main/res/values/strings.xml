@@ -8,13 +8,13 @@
   ~     the Free Software Foundation, either version 3 of the License, or
   ~     (at your option) any later version.
   ~
-  ~     Foobar is distributed in the hope that it will be useful,
+  ~     Mobility Rate Calculator is distributed in the hope that it will be useful,
   ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~     GNU General Public License for more details.
   ~
   ~     You should have received a copy of the GNU General Public License
-  ~     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+  ~     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
@@ -37,7 +37,7 @@
     <string name="calculating">Calculating</string>
     <string name="two_way">Two-way</string>
 
-    <string name="ok" translatable="false">Ok</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="one_way">One way</string>
@@ -66,4 +66,11 @@
     <string name="minivan" translatable="false">Minivan</string>
     <string name="transport" translatable="false">Transport</string>
     <string name="to_time">To</string>
+
+    <string name="wrong_format">Wrong format</string>
+
+    <string name="app_obsolete">Application obsolete</string>
+    <string name="mobilitys_new_app">On December 6th, Mobility has released a new official application which makes this one obsolete. Therefore I suggest that you try out the official one. However, Mobility Rate Calculator will soon be updated with the new prices.</string>
+    <string name="prices_obsolete">Obsolete prices</string>
+    <string name="prices_obsolete_text">Mobility has new rates since December 6th. This application will soon be updated with the new prices but in the meantime, I suggest that you try out their new application.</string>
 </resources>

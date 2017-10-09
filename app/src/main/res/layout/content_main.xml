@@ -9,13 +9,13 @@
   ~     the Free Software Foundation, either version 3 of the License, or
   ~     (at your option) any later version.
   ~
-  ~     Foobar is distributed in the hope that it will be useful,
+  ~     Mobility Rate Calculator is distributed in the hope that it will be useful,
   ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~     GNU General Public License for more details.
   ~
   ~     You should have received a copy of the GNU General Public License
-  ~     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+  ~     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,9 +28,44 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ch.pec0ra.mobilityratecalculator.MainActivity"
     tools:showIn="@layout/activity_main">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/app_obsolete_warning"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginBottom="4dp"
+                android:drawableStart="@drawable/ic_warning_24dp"
+                android:drawableLeft="@drawable/ic_warning_24dp"
+                android:drawablePadding="6dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_obsolete"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mobilitys_new_app" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -104,12 +139,13 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:ems="10"
                 android:id="@+id/kilometers_input"
                 android:text="10"
                 android:textAlignment="viewEnd"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="end" />
 
             <Button
                 android:text="@string/set_itinerary"

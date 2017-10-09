@@ -8,26 +8,26 @@
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
  *
- *     Foobar is distributed in the hope that it will be useful,
+ *     Mobility Rate Calculator is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "ch.pec0ra.mobilityratecalculator"
         minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 7
-        versionName "2.1"
+        targetSdkVersion 26
+        versionCode 8
+        versionName "2.2"
         setProperty("archivesBaseName", "MobilityRateCalculator-$versionName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -44,10 +44,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-    compile 'com.android.support:percent:24.2.1'
-    compile 'com.google.guava:guava:18.0'
+    compile 'com.android.support:percent:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
 }

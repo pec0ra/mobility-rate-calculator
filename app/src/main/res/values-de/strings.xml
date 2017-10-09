@@ -8,13 +8,13 @@
   ~     the Free Software Foundation, either version 3 of the License, or
   ~     (at your option) any later version.
   ~
-  ~     Foobar is distributed in the hope that it will be useful,
+  ~     Mobility Rate Calculator is distributed in the hope that it will be useful,
   ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~     GNU General Public License for more details.
   ~
   ~     You should have received a copy of the GNU General Public License
-  ~     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+  ~     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
@@ -34,7 +34,7 @@
     <string name="find_itinerary">Weg finden</string>
     <string name="calculate_distance">Distanz berechnen</string>
     <string name="itinerary">Weg</string>
-    <string name="calculating">Berechnung läuft...</string>
+    <string name="calculating">Berechnung läuft…</string>
     <string name="two_way">Hin- und Rückfahrt</string>
 
     <string name="cancel">Abbrechen</string>
@@ -53,4 +53,11 @@
     <string name="hours_during_the_day">Anzahl Stunden tagsüber</string>
     <string name="hours_during_the_night">Anzahl Stunden nachts</string>
     <string name="to_time">Bis</string>
+
+    <string name="wrong_format">Falsches Format</string>
+
+    <string name="app_obsolete">App veraltet</string>
+    <string name="mobilitys_new_app">Diese App ist veraltet. Am 6. Dezember hat Mobility eine neue, offizielle App publiziert. Ich schlage vor, diese zu verwenden. Die hier vorliegende App wird trotzdem bald mit den neuen Preisen aktualisiert.</string>
+    <string name="prices_obsolete">Preise veraltet</string>
+    <string name="prices_obsolete_text">Mobility hat seit dem 6. Dezember neue Preise. Diese App wird bald mit den neuen Tarifen aktualisiert. Probieren Sie in der Zwischenzeit die neue offizielle App von Mobility aus!</string>
 </resources>
