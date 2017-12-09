@@ -68,9 +68,4 @@
     <string name="to_time">To</string>
 
     <string name="wrong_format">Wrong format</string>
-
-    <string name="app_obsolete">Application obsolete</string>
-    <string name="mobilitys_new_app">On December 6th, Mobility has released a new official application which makes this one obsolete. Therefore I suggest that you try out the official one. However, Mobility Rate Calculator will soon be updated with the new prices.</string>
-    <string name="prices_obsolete">Obsolete prices</string>
-    <string name="prices_obsolete_text">Mobility has new rates since December 6th. This application will soon be updated with the new prices but in the meantime, I suggest that you try out their new application.</string>
 </resources>

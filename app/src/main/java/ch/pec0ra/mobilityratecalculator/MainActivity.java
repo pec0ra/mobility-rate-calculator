@@ -96,34 +96,6 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
 
     }
 
-    @Override
-    protected void onResume() {
-        Calendar today = Calendar.getInstance();
-        Calendar december6 = Calendar.getInstance();
-        december6.set(2017, 12, 6);
-
-        if(today.compareTo(december6) >= 0){
-            showWarning();
-        }
-        super.onResume();
-    }
-
-    private void showWarning(){
-        final View warningView = findViewById(R.id.app_obsolete_warning);
-        warningView.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    warningView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-    }
-
     private class MyClickListener implements View.OnClickListener {
 
         private final boolean isStart;

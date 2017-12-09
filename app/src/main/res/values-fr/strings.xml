@@ -47,10 +47,5 @@
     <string name="total">Total</string>
     <string name="two_way">Aller-Retour</string>
     <string name="to_time">À</string>
-
-    <string name="app_obsolete">Application obsolète</string>
-    <string name="mobilitys_new_app">Le 6 décembre, Mobility a publié une nouvelle application officielle qui rend Mobility Rate Calculator obsolète. Je vous suggère d\'essayer cette nouvelle application. Mobility Rate Calculator sera quand-même bientôt mis à jour avec les nouveaux tarifs.</string>
-    <string name="prices_obsolete">Tarifs obsolètes</string>
-    <string name="prices_obsolete_text">Mobility a des nouveaux tarifs depuis le 6 décembre. Cette application sera bientôt mise à jour avec les nouveaux tarifs mais en attendant, je vous suggères d\'essayer la nouvelle application officielle.</string>
     <string name="wrong_format">Mauvais format</string>
 </resources>

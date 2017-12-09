@@ -55,9 +55,4 @@
     <string name="to_time">Bis</string>
 
     <string name="wrong_format">Falsches Format</string>
-
-    <string name="app_obsolete">App veraltet</string>
-    <string name="mobilitys_new_app">Diese App ist veraltet. Am 6. Dezember hat Mobility eine neue, offizielle App publiziert. Ich schlage vor, diese zu verwenden. Die hier vorliegende App wird trotzdem bald mit den neuen Preisen aktualisiert.</string>
-    <string name="prices_obsolete">Preise veraltet</string>
-    <string name="prices_obsolete_text">Mobility hat seit dem 6. Dezember neue Preise. Diese App wird bald mit den neuen Tarifen aktualisiert. Probieren Sie in der Zwischenzeit die neue offizielle App von Mobility aus!</string>
 </resources>

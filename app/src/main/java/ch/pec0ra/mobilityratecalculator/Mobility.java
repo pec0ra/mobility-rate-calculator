@@ -45,7 +45,8 @@ public final class Mobility {
 
     public static final int DAY_RATE_START = 7;
     public static final int DAY_RATE_END = 22;
-    public static final int KM_HIGH_RATE_END = 100;
+    // Rates are not lower after 100km anymore so we use the highest value possible
+    public static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
 
     public static boolean isDayHour(int hour){
         return hour >= DAY_RATE_START && hour <= DAY_RATE_END;
@@ -57,15 +58,15 @@ public final class Mobility {
     public static Map<Category, Rate> ratesMap;
     static {
         ratesMap = new HashMap<>();
-        ratesMap.put(Category.BUDGET, new Rate(new BigDecimal("2.8"), new BigDecimal("0.8"), new BigDecimal("0.5"), new BigDecimal("0.25")));
-        ratesMap.put(Category.MICRO, new Rate(new BigDecimal("2.8"), new BigDecimal("0.8"), new BigDecimal("0.58"), new BigDecimal("0.29")));
-        ratesMap.put(Category.ECONOMY, new Rate(new BigDecimal("2.8"), new BigDecimal("0.8"), new BigDecimal("0.62"), new BigDecimal("0.31")));
-        ratesMap.put(Category.ELECTRO, new Rate(new BigDecimal("2.8"), new BigDecimal("0.8"), new BigDecimal("0.62"), new BigDecimal("0.31")));
-        ratesMap.put(Category.COMBI, new Rate(new BigDecimal("3.2"), new BigDecimal("0.8"), new BigDecimal("0.72"), new BigDecimal("0.36")));
-        ratesMap.put(Category.CABRIO, new Rate(new BigDecimal("3.8"), new BigDecimal("0.8"), new BigDecimal("0.88"), new BigDecimal("0.44")));
-        ratesMap.put(Category.EMOTION, new Rate(new BigDecimal("3.8"), new BigDecimal("0.8"), new BigDecimal("0.88"), new BigDecimal("0.44")));
-        ratesMap.put(Category.MINIVAN, new Rate(new BigDecimal("4.4"), new BigDecimal("0.8"), new BigDecimal("0.94"), new BigDecimal("0.47")));
-        ratesMap.put(Category.TRANSPORT, new Rate(new BigDecimal("4.4"), new BigDecimal("0.8"), new BigDecimal("0.94"), new BigDecimal("0.47")));
+        ratesMap.put(Category.BUDGET, new Rate(new BigDecimal("2.0"), new BigDecimal("2.0"), new BigDecimal("0.55"), new BigDecimal("0.55")));
+        ratesMap.put(Category.MICRO, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
+        ratesMap.put(Category.ECONOMY, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
+        ratesMap.put(Category.ELECTRO, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
+        ratesMap.put(Category.COMBI, new Rate(new BigDecimal("3.0"), new BigDecimal("3.0"), new BigDecimal("0.8"), new BigDecimal("0.8")));
+        ratesMap.put(Category.CABRIO, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
+        ratesMap.put(Category.EMOTION, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
+        ratesMap.put(Category.MINIVAN, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
+        ratesMap.put(Category.TRANSPORT, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
     }
 
     public static BigDecimal getDayHourlyRate(Category category) {
