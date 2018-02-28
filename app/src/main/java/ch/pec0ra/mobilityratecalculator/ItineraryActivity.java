@@ -73,6 +73,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
     public static final String DISTANCE_EXTRA = "DISTANCE_EXTRA";
     private static final int MAP_ITINERARY_MARGIN = 100;
+    private static final float MAP_DEFAULT_ZOOM = 11f;
     private static final int REQUEST_CODE_ORIGIN = 500;
     private static final int REQUEST_CODE_DEST = 600;
 
@@ -158,6 +159,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 fromTV.setError(null);
                 clearMarker(ORIGIN);
                 markerA = mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(getString(R.string.origin)));
+                centerCamera();
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 if(status.getStatusMessage() != null) {
@@ -172,12 +174,30 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 toTV.setError(null);
                 clearMarker(DESTINATION);
                 markerB = mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(getString(R.string.destination)));
+                centerCamera();
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 if(status.getStatusMessage() != null) {
                     Snackbar.make(findViewById(R.id.main_layout), status.getStatusMessage(), Snackbar.LENGTH_LONG).show();
                 }
             }
+        }
+    }
+
+    private void centerCamera() {
+        if(markerA == null && markerB == null){
+            // Move the camera to switzerland
+            mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(switzerlandSW, switzerlandNE), 10));
+        } else if(markerA == null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerB.getPosition(), MAP_DEFAULT_ZOOM));
+        } else if(markerB == null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerA.getPosition(), MAP_DEFAULT_ZOOM));
+        } else {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(markerA.getPosition());
+            builder.include(markerB.getPosition());
+            LatLngBounds bounds = builder.build();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, MAP_ITINERARY_MARGIN));
         }
     }
 
@@ -201,7 +221,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             if (markerB == null) {
                 toTV.setError(getString(R.string.address_not_found));
             }
-            Snackbar.make(findViewById(R.id.main_layout), R.string.origin_and_destination_cannot_be_emtpy, Snackbar.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_layout), R.string.origin_and_destination_cannot_be_emtpy, Snackbar.LENGTH_LONG);
+            snackbar.getView().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
+            snackbar.show();
             return;
         }
 
@@ -264,6 +286,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void clearMarker(ItineraryService.Waypoint waypoint){
+        fab.setVisibility(View.GONE);
+        View resultCard = findViewById(R.id.distance_result_card);
+        resultCard.setVisibility(View.INVISIBLE);
+
+        if(lines != null){
+            lines.remove();
+            lines = null;
+        }
         switch (waypoint){
             case ORIGIN:
                 if(markerA != null) {
@@ -322,11 +352,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         @Override
         public void onMapLongClick(LatLng latLng) {
 
-            if(lines != null){
-                lines.remove();
-                lines = null;
-            }
-
             CharSequence waypoints[] = new CharSequence[] {getString(R.string.set_as_origin), getString(R.string.set_as_destination)};
 
             String address = getAddress(latLng);
@@ -334,9 +359,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             AlertDialog.Builder builder = new AlertDialog.Builder(ItineraryActivity.this);
             builder.setTitle(address);
             builder.setItems(waypoints, (dialog, which) -> {
-                fab.setVisibility(View.GONE);
-                View resultCard = findViewById(R.id.distance_result_card);
-                resultCard.setVisibility(View.INVISIBLE);
                 switch (which){
                     case 1:
                         toTV.setText(address);
