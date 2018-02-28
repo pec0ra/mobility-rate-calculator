@@ -60,13 +60,13 @@ public class PricesActivity extends AppCompatActivity {
     }
 
     private void addPriceLayouts(){
-        LinearLayout pricesContainer = (LinearLayout)findViewById(R.id.prices_container);
+        LinearLayout pricesContainer = findViewById(R.id.prices_container);
         if(pricesContainer == null){
             return;
         }
         for(Mobility.Category category : Mobility.Category.values()){
             LayoutInflater inflater = LayoutInflater.from(getBaseContext());
-            View v = inflater.inflate(R.layout.price_item, null, false);
+            View v = inflater.inflate(R.layout.price_item, pricesContainer, false);
 
             ((TextView)v.findViewById(R.id.category_name)).setText(Mobility.categoryToString(category, getBaseContext()));
             RateCalculator.Price price = rateCalculator.getPrice(category);

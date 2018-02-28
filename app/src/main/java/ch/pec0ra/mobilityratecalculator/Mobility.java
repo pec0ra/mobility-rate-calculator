@@ -43,19 +43,19 @@ public final class Mobility {
         TRANSPORT
     }
 
-    public static final int DAY_RATE_START = 7;
-    public static final int DAY_RATE_END = 22;
+    private static final int DAY_RATE_START = 7;
+    private static final int DAY_RATE_END = 22;
     // Rates are not lower after 100km anymore so we use the highest value possible
-    public static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
+    static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
 
-    public static boolean isDayHour(int hour){
+    static boolean isDayHour(int hour){
         return hour >= DAY_RATE_START && hour <= DAY_RATE_END;
     }
-    public static boolean isKMLow(int km){
+    private static boolean isKMLow(int km){
         return km < KM_HIGH_RATE_END;
     }
 
-    public static Map<Category, Rate> ratesMap;
+    private static Map<Category, Rate> ratesMap;
     static {
         ratesMap = new HashMap<>();
         ratesMap.put(Category.BUDGET, new Rate(new BigDecimal("2.0"), new BigDecimal("2.0"), new BigDecimal("0.55"), new BigDecimal("0.55")));
@@ -69,16 +69,16 @@ public final class Mobility {
         ratesMap.put(Category.TRANSPORT, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
     }
 
-    public static BigDecimal getDayHourlyRate(Category category) {
+    static BigDecimal getDayHourlyRate(Category category) {
         return ratesMap.get(category).hourlyRateDay;
     }
-    public static BigDecimal getNightHourlyRate(Category category) {
+    static BigDecimal getNightHourlyRate(Category category) {
         return ratesMap.get(category).hourlyRateNight;
     }
-    public static BigDecimal getHighKmsRate(Category category) {
+    static BigDecimal getHighKmsRate(Category category) {
         return ratesMap.get(category).KMRateHigh;
     }
-    public static BigDecimal getLowKmsRate(Category category) {
+    static BigDecimal getLowKmsRate(Category category) {
         return ratesMap.get(category).KMRateLow;
     }
 
@@ -100,10 +100,10 @@ public final class Mobility {
 
 
     private static class Rate {
-        public final BigDecimal hourlyRateDay;
-        public final BigDecimal hourlyRateNight;
-        public final BigDecimal KMRateHigh;
-        public final BigDecimal KMRateLow;
+        final BigDecimal hourlyRateDay;
+        final BigDecimal hourlyRateNight;
+        final BigDecimal KMRateHigh;
+        final BigDecimal KMRateLow;
 
         private Rate(BigDecimal hourlyRateDay, BigDecimal hourlyRateNight, BigDecimal kmRateHigh, BigDecimal kmRateLow) {
             this.hourlyRateDay = hourlyRateDay;
@@ -124,11 +124,10 @@ public final class Mobility {
             context.getString(R.string.minivan),
             context.getString(R.string.transport)
         };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
-        return adapter;
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
     }
 
-    public static String categoryToString(Category category, Context context){
+    static String categoryToString(Category category, Context context){
         switch (category){
             case BUDGET:
                 return context.getString(R.string.budget);

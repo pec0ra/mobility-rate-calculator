@@ -54,10 +54,10 @@ public abstract class OnClickTouchListener implements View.OnTouchListener {
         return false;
     }
 
-    protected int getX(){
+    int getX(){
         return positionX;
     }
-    protected int getY(){
+    int getY(){
         return positionY;
     }
 

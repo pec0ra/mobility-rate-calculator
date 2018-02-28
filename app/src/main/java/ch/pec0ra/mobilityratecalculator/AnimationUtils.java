@@ -35,14 +35,14 @@ class AnimationUtils {
 
     private static final String TAG = AnimationUtils.class.getSimpleName();
 
-    public static final String CENTER_X_EXTRA = "CENTER_X_EXTRA";
-    public static final String CENTER_Y_EXTRA = "CENTER_Y_EXTRA";
-    public static final String ANIMATION_COLOR = "ANIMATION_COLOR";
+    static final String CENTER_X_EXTRA = "CENTER_X_EXTRA";
+    static final String CENTER_Y_EXTRA = "CENTER_Y_EXTRA";
+    static final String ANIMATION_COLOR = "ANIMATION_COLOR";
 
-    public static void circleReveal(View view){
+    static void circleReveal(View view){
         circleReveal(view, 0);
     }
-    public static void circleReveal(View view, int delay){
+    private static void circleReveal(View view, int delay){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // get the center for the clipping circle
             int cx = view.getWidth() / 2;
