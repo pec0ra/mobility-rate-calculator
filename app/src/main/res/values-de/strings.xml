@@ -55,4 +55,18 @@
     <string name="to_time">Bis</string>
 
     <string name="wrong_format">Falsches Format</string>
+    <string name="origin">Start</string>
+    <string name="destination">Ziel</string>
+    <string name="set_as">Hinzufügen als</string>
+    <string name="set_as_origin">Hinzufügen als Start</string>
+    <string name="set_as_destination">Hinzufügen als Ziel</string>
+    <string name="address_not_found">Die Adresse konnte nicht gefunden werden</string>
+    <string name="error">Bei der Berechnung der Distanz ist ein Fehler aufgetreten</string>
+    <string name="distance_km">Distanz: %d Km</string>
+    <string name="no_route_found">Kein Weg gefunden</string>
+    <string name="origin_and_destination_cannot_be_emtpy">Start un Ziel müssen angegeben werden</string>
+    <string name="trip">Fahrt</string>
+    <string name="time_h_m_format">{0,choice,0#|1#1 Stunde\u0020|1&lt;{0} Stunden\u0020}{1,choice,0#|1&lt;{1} Minuten}</string>
+    <string name="time_required">Benötige Zeit</string>
+    <string name="planned_mileage">Geplante Kilometer</string>
 </resources>
