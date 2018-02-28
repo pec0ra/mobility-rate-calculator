@@ -22,6 +22,8 @@ package ch.pec0ra.mobilityratecalculator;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +31,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
+import java.util.Locale;
 
 public class PricesActivity extends AppCompatActivity {
 
     public static final String RATE_CALCULATOR_EXTRA = "rate_calculator_extra";
+
+    public static final String HOUR_FORMAT = "HH:mm";
 
     private RateCalculator rateCalculator;
 
@@ -51,9 +57,8 @@ public class PricesActivity extends AppCompatActivity {
 
         rateCalculator = (RateCalculator) getIntent().getSerializableExtra(RATE_CALCULATOR_EXTRA);
 
-        ((TextView)findViewById(R.id.day_hours_count)).setText(timeDF.format(rateCalculator.getDayHoursCount()));
-        ((TextView)findViewById(R.id.night_hours_count)).setText(timeDF.format(rateCalculator.getNightHoursCount()));
-        ((TextView)findViewById(R.id.total_hours_count)).setText(timeDF.format(rateCalculator.getTotalHoursCount()));
+        String duration = MessageFormat.format(getResources().getText(R.string.time_h_m_format).toString(), rateCalculator.getTotalHoursCount(), rateCalculator.getMinutesCount());
+        ((TextView)findViewById(R.id.duration_text)).setText(duration);
         ((TextView)findViewById(R.id.kilometers_text)).setText(getString(R.string.kilometers_count, rateCalculator.getTotalKilometersCount()));
 
         addPriceLayouts();

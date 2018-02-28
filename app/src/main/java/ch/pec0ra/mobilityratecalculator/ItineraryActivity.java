@@ -113,6 +113,16 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         toTV.setOnClickListener(view -> openPlaceAutocompleteActivity(REQUEST_CODE_DEST, toTV.getText().toString()));
 
         twoWay = findViewById(R.id.two_way_checkbox);
+        twoWay.setOnClickListener(view -> {
+            fab.hide();
+            View resultCard = findViewById(R.id.distance_result_card);
+            resultCard.setVisibility(View.INVISIBLE);
+
+            if(lines != null){
+                lines.remove();
+                lines = null;
+            }
+        });
 
         findViewById(R.id.submit_button).setOnClickListener(view -> startCalculateJob());
 
@@ -277,7 +287,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             LatLngBounds bounds = builder.build();
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, MAP_ITINERARY_MARGIN));
 
-            fab.setVisibility(View.VISIBLE);
+            fab.show();
         } else {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.main_layout), R.string.no_route_found, Snackbar.LENGTH_LONG);
             snackbar.getView().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
@@ -286,7 +296,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void clearMarker(ItineraryService.Waypoint waypoint){
-        fab.setVisibility(View.GONE);
+        fab.hide();
         View resultCard = findViewById(R.id.distance_result_card);
         resultCard.setVisibility(View.INVISIBLE);
 

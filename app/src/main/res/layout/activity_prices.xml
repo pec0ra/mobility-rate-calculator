@@ -20,96 +20,68 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_prices"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ch.pec0ra.mobilityratecalculator.PricesActivity">
 
     <LinearLayout
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="@string/time"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="@string/trip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/time_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginBottom="8dp" />
 
-        <TableLayout
-            android:stretchColumns="1"
+        <android.support.v7.widget.CardView
+            android:layout_marginStart="@dimen/card_padding"
+            android:layout_marginEnd="@dimen/card_padding"
+            android:layout_marginBottom="@dimen/content_padding"
+            app:contentPadding="@dimen/content_padding"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp">
+            android:layout_height="wrap_content">
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
-                    android:padding="3dp"
-                    android:text="@string/hours_during_the_day"
-                    android:id="@+id/textView5" />
-
+                    android:textSize="@dimen/text_size"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/ic_time_24dp"
+                    android:drawableLeft="@drawable/ic_time_24dp"
+                    android:drawablePadding="@dimen/drawable_padding"
+                    android:paddingBottom="@dimen/table_row_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/duration_text"/>
                 <TextView
-                    android:padding="3dp"
-                    android:id="@+id/day_hours_count"
-                    android:gravity="end" />
-            </TableRow>
+                    android:textSize="@dimen/text_size"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/ic_directions_24dp"
+                    android:drawableLeft="@drawable/ic_directions_24dp"
+                    android:drawablePadding="@dimen/drawable_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/kilometers_text"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:padding="3dp"
-                    android:text="@string/hours_during_the_night"
-                    android:id="@+id/textView7" />
-
-                <TextView
-                    android:padding="3dp"
-                    android:id="@+id/night_hours_count"
-                    android:gravity="end" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:padding="3dp"
-                    android:text="@string/total"
-                    android:id="@+id/textView9" />
-
-                <TextView
-                    android:padding="3dp"
-                    android:id="@+id/total_hours_count"
-                    android:gravity="end" />
-            </TableRow>
-        </TableLayout>
-
-        <TextView
-            android:text="@string/distance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/distance_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/kilometers_text"
-            android:layout_marginBottom="16dp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:text="@string/prices"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"

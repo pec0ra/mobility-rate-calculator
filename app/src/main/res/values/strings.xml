@@ -69,7 +69,6 @@
 
     <string name="wrong_format">Wrong format</string>
 
-    <string name="submit">Submit</string>
     <string name="origin">Origin</string>
     <string name="destination">Destination</string>
     <string name="set_as">Set as</string>
@@ -78,8 +77,12 @@
     <string name="address_not_found">Address not found</string>
     <string name="error">Error calculating the distance</string>
 
-    <string name="distance_km">Distance: %d km</string>
+    <string name="distance_km">Distance: %d Km</string>
     <string name="no_route_found">No route found</string>
     <string name="origin_and_destination_cannot_be_emtpy">Origin and destination cannot be empty</string>
+    <string name="trip">Journey</string>
+    <string name="time_h_m_format">{0,choice,0#|1#1 hour\u0020|1&lt;{0} hours\u0020}{1,choice,0#|1&lt;{1} minutes}</string>
+    <string name="planned_mileage">Planned mileage</string>
+    <string name="time_required">Time required</string>
 
 </resources>

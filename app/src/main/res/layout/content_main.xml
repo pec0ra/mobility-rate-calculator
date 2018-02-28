@@ -29,102 +29,140 @@
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_marginStart="@dimen/card_padding"
+            android:layout_marginEnd="@dimen/card_padding"
+            android:layout_marginBottom="4dp"
+            app:contentPadding="@dimen/content_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_title_padding"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/from"
-                    android:id="@+id/from_text_view" />
-
-                <EditText
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/time_required"
+                    android:id="@+id/time_required_view"/>
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/from_field"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:clickable="true"/>
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size"
+                            android:text="@string/from"
+                            android:id="@+id/from_text_view" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/from_field"
+                            style="@style/Widget.AppCompat.EditText"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:clickable="true"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size"
+                            android:text="@string/to_time"
+                            android:id="@+id/textView" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/to_field"
+                            style="@style/Widget.AppCompat.EditText"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:clickable="true"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+        </android.support.v7.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/to_time"
-                    android:id="@+id/textView" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/to_field"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:clickable="true"/>
-
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/kilometers"
-            android:id="@+id/kilometers_text_view"
-            android:layout_marginTop="6dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/card_padding"
+            android:layout_marginEnd="@dimen/card_padding"
+            android:layout_marginBottom="@dimen/content_padding"
+            app:contentPadding="@dimen/content_padding"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/kilometers_input"
-                android:text="10"
-                android:textAlignment="viewEnd"
-                android:layout_weight="1"
-                android:gravity="end" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_title_padding"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/planned_mileage"
+                    android:id="@+id/kilometers_text_view"/>
 
-            <Button
-                android:text="@string/set_itinerary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/itinerary_button"
-                android:layout_weight="0.5"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
-        </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:id="@+id/kilometers_input"
+                        android:text="10"
+                        android:textAlignment="viewEnd"
+                        android:layout_weight="1"
+                        android:gravity="end" />
+
+                    <Button
+                        android:text="@string/set_itinerary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/itinerary_button"
+                        android:layout_weight="0.5"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 </FrameLayout>

@@ -17,16 +17,12 @@
   ~     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="content_padding">16dp</dimen>
-    <dimen name="card_padding">8dp</dimen>
-    <dimen name="drawable_padding">8dp</dimen>
-    <dimen name="table_row_margin">8dp</dimen>
-    <dimen name="text_size">16sp</dimen>
-    <dimen name="card_title_padding">12dp</dimen>
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:fillColor="#FFa1101b"
+        android:pathData="M9,2c-1.05,0 -2.05,0.16 -3,0.46 4.06,1.27 7,5.06 7,9.54 0,4.48 -2.94,8.27 -7,9.54 0.95,0.3 1.95,0.46 3,0.46 5.52,0 10,-4.48 10,-10S14.52,2 9,2z"/>
+</vector>

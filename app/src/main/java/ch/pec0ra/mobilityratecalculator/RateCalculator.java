@@ -81,14 +81,15 @@ class RateCalculator implements Serializable{
         }
     }
 
-    BigDecimal getDayHoursCount(){
-        return new BigDecimal(dayHalfHoursCount).divide(new BigDecimal(2), RoundingMode.HALF_UP);
+    int getMinutesCount(){
+        if((nightHalfHoursCount + dayHalfHoursCount) % 2 == 1){
+            return 30;
+        } else {
+            return 0;
+        }
     }
-    BigDecimal getNightHoursCount(){
-        return new BigDecimal(nightHalfHoursCount).divide(new BigDecimal(2), RoundingMode.HALF_UP);
-    }
-    BigDecimal getTotalHoursCount(){
-        return getDayHoursCount().add(getNightHoursCount());
+    int getTotalHoursCount(){
+        return new BigDecimal(dayHalfHoursCount + nightHalfHoursCount).divide(new BigDecimal(2), RoundingMode.DOWN).intValue();
     }
     int getTotalKilometersCount(){
         return highRateKms + lowRateKms;
