@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2016 Basile
+ *     Copyright (C) 2017 Basile Maret
  *
  *     This file is part of Mobility Rate Calculator.
  *
@@ -19,35 +19,42 @@
 
 package ch.pec0ra.mobilityratecalculator;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
-import com.wdullaer.materialdatetimepicker.time.*;
-import com.wdullaer.materialdatetimepicker.date.*;
+import static ch.pec0ra.mobilityratecalculator.AnimationUtils.ANIMATION_COLOR;
+import static ch.pec0ra.mobilityratecalculator.AnimationUtils.CENTER_X_EXTRA;
+import static ch.pec0ra.mobilityratecalculator.AnimationUtils.CENTER_Y_EXTRA;
+import static ch.pec0ra.mobilityratecalculator.ItineraryActivity.DISTANCE_EXTRA;
 
-public class MainActivity extends AppCompatActivity implements ItineraryDialog.NoticeDialogListener, ItineraryConfirmationDialog.NoticeDialogListener{
+public class MainActivity extends AppCompatActivity{
+
+    public static final int REQUEST_DISTANCE = 4;
 
     private static final String DATE_PICKER_DIALOG = "date_picker_dialog";
     private static final String TIME_PICKER_DIALOG = "time_picker_dialog";
-    private static final String ITINERARY_DIALOG = "itinerary_dialog";
-    private static final String ITINERARY_CONFIRMATION_DIALOG = "itinerary_confirmation_dialog";
 
-    private static final long HOUR_IN_MS = 3600000;
-    private static final long HALF_HOUR_IN_MS = 1800000;
-    Button fromField;
-    Button toField;
+    EditText fromField;
+    EditText toField;
     EditText kmInput;
 
     Calendar fromDate;
@@ -61,31 +68,31 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startCalculateJob();
-            }
-        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> startCalculateJob());
 
-        fromField = (Button)findViewById(R.id.from_field);
-        toField = (Button)findViewById(R.id.to_field);
-        kmInput = (EditText)findViewById(R.id.kilometers_input);
+        fromField = findViewById(R.id.from_field);
+        toField = findViewById(R.id.to_field);
+        kmInput = findViewById(R.id.kilometers_input);
 
         fromDate = Calendar.getInstance();
-        long roundedTime = (long) (Math.ceil((double)fromDate.getTimeInMillis() / (double)HALF_HOUR_IN_MS) * HALF_HOUR_IN_MS);
+        long roundedTime = (long) (Math.ceil((double)fromDate.getTimeInMillis() / (double)TimeUnit.MINUTES.toMillis(30)) * TimeUnit.MINUTES.toMillis(30));
         fromDate.setTimeInMillis(roundedTime);
         toDate = Calendar.getInstance();
-        toDate.setTimeInMillis(roundedTime + HOUR_IN_MS);
+        toDate.setTimeInMillis(roundedTime + TimeUnit.HOURS.toMillis(1));
 
-        findViewById(R.id.itinerary_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.itinerary_button).setOnTouchListener(new OnClickTouchListener(){
             @Override
             public void onClick(View v) {
-                new ItineraryDialog().show(getSupportFragmentManager(), ITINERARY_DIALOG);
+                Intent intent = new Intent(MainActivity.this, ItineraryActivity.class);
+                intent.putExtra(CENTER_X_EXTRA, getX());
+                intent.putExtra(CENTER_Y_EXTRA, getY());
+                intent.putExtra(ANIMATION_COLOR, ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivityForResult(intent, REQUEST_DISTANCE);
             }
         });
 
@@ -96,12 +103,35 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_DISTANCE) {
+            if (resultCode == Activity.RESULT_OK) {
+                long distance = data.getLongExtra(DISTANCE_EXTRA, 0);
+                kmInput.setText(String.valueOf(distance));
+            }
+        }
+    }
+
     private class MyClickListener implements View.OnClickListener {
 
         private final boolean isStart;
         private final Calendar cal;
 
-        public MyClickListener(boolean isStart){
+        MyClickListener(boolean isStart){
             this.isStart = isStart;
             if(isStart){
                 this.cal = fromDate;
@@ -116,13 +146,13 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
             dialog.setMinDate(Calendar.getInstance());
             dialog.show(getFragmentManager(), DATE_PICKER_DIALOG);
         }
-    };
+    }
 
     private class MyDateSetListener implements DatePickerDialog.OnDateSetListener {
         private final Calendar cal;
         private final boolean isStart;
 
-        public MyDateSetListener(boolean isStart){
+        MyDateSetListener(boolean isStart){
             this.isStart = isStart;
             if(isStart){
                 this.cal = fromDate;
@@ -138,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
             tmpDate.set(Calendar.YEAR, year);
             tmpDate.set(Calendar.MONTH, monthOfYear);
             tmpDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            TimePickerDialog dialog = new TimePickerDialog().newInstance(new MyTimeSetListener(isStart), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
+            TimePickerDialog dialog = TimePickerDialog.newInstance(new MyTimeSetListener(isStart), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
             dialog.setTimeInterval(1, 30);
             dialog.show(getFragmentManager(), TIME_PICKER_DIALOG);
         }
@@ -147,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
         private final Calendar cal;
         private final boolean isStart;
 
-        public MyTimeSetListener(boolean isStart){
+        MyTimeSetListener(boolean isStart){
             this.isStart = isStart;
             if(isStart){
                 this.cal = fromDate;
@@ -157,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
         }
 
         @Override
-        public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
             cal.setTime(tmpDate.getTime());
             cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
             cal.set(Calendar.MINUTE, minute);
@@ -172,16 +202,15 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
     private void correctDates(boolean isStart) {
         long difference = toDate.getTimeInMillis() - fromDate.getTimeInMillis();
         if(isStart){
-            if(difference < HOUR_IN_MS){
-                toDate.setTimeInMillis(fromDate.getTimeInMillis() + HOUR_IN_MS);
+            if(difference < TimeUnit.HOURS.toMillis(1)){
+                toDate.setTimeInMillis(fromDate.getTimeInMillis() + TimeUnit.HOURS.toMillis(1));
             }
         } else {
-            if(difference < HOUR_IN_MS){
-                fromDate.setTimeInMillis(toDate.getTimeInMillis() - HOUR_IN_MS);
+            if(difference < TimeUnit.HOURS.toMillis(1)){
+                fromDate.setTimeInMillis(toDate.getTimeInMillis() - TimeUnit.HOURS.toMillis(1));
             }
         }
     }
-
 
     private void updateFields() {
         fromField.setText(DateFormat.format("dd.MM kk:mm", fromDate));
@@ -189,30 +218,16 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
     }
 
     private void startCalculateJob() {
-        int kms = 0;
+        int kms;
         try {
             kms = Integer.parseInt(kmInput.getText().toString());
         } catch(NumberFormatException e){
             kmInput.setError(getString(R.string.wrong_format));
             return;
         }
-        final RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms);
 
         startLoad(getString(R.string.calculating));
-        new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... params) {
-                rateCalculator.calculate();
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                showPrices(rateCalculator);
-                endLoad();
-            }
-        }.execute();
+        new CalculateAsyncTask(fromDate, toDate, kms).execute();
     }
 
     private void showPrices(RateCalculator rateCalculator) {
@@ -234,35 +249,39 @@ public class MainActivity extends AppCompatActivity implements ItineraryDialog.N
         dialog = null;
     }
 
-    @Override
-    public void onDialogPositiveClick(final String from, final String to, final boolean isTwoWay) {
-        startLoad(getString(R.string.calculating));
-        new AsyncTask<Void, Void, DistanceCalculator.Itinerary>() {
-            @Override
-            protected DistanceCalculator.Itinerary doInBackground(Void... params) {
-                return new DistanceCalculator(from, to, isTwoWay, getBaseContext()).calculate();
-            }
-
-            @Override
-            protected void onPostExecute(final DistanceCalculator.Itinerary itinerary) {
-                super.onPostExecute(itinerary);
-                endLoad();
-                if(itinerary.hasError){
-                    Toast.makeText(getBaseContext(), itinerary.errorMessage, Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                ItineraryConfirmationDialog confirmDialog = new ItineraryConfirmationDialog();
-                confirmDialog.setItinerary(itinerary);
-                confirmDialog.show(getSupportFragmentManager(), ITINERARY_CONFIRMATION_DIALOG);
-
-            }
-        }.execute();
-    }
-    @Override
-    public void onDialogPositiveClick(int distance) {
-        kmInput.setText(String.valueOf(distance));
+    @Subscribe
+    public void onEvent(CalculationFinishedEvent event){
+        showPrices(event.rateCalculator);
+        endLoad();
     }
 
+    private static class CalculateAsyncTask extends AsyncTask<Void, Void, Void>{
+
+        private final RateCalculator rateCalculator;
+
+        CalculateAsyncTask(Calendar fromDate, Calendar toDate, int kms){
+            rateCalculator = new RateCalculator(fromDate, toDate, kms);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            rateCalculator.calculate();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            EventBus.getDefault().post(new CalculationFinishedEvent(rateCalculator));
+        }
+    }
+
+    private static class CalculationFinishedEvent {
+        final RateCalculator rateCalculator;
+
+        CalculationFinishedEvent(RateCalculator rateCalculator) {
+            this.rateCalculator = rateCalculator;
+        }
+    }
 
 }

@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2016 Basile
+ *     Copyright (C) 2017 Basile Maret
  *
  *     This file is part of Mobility Rate Calculator.
  *
@@ -26,7 +26,7 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.

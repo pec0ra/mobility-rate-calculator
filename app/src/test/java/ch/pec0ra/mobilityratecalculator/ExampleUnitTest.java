@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2016 Basile
+ *     Copyright (C) 2017 Basile Maret
  *
  *     This file is part of Mobility Rate Calculator.
  *
@@ -21,7 +21,7 @@ package ch.pec0ra.mobilityratecalculator;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

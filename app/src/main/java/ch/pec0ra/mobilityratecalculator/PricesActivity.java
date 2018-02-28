@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2016 Basile
+ *     Copyright (C) 2017 Basile Maret
  *
  *     This file is part of Mobility Rate Calculator.
  *
@@ -19,9 +19,9 @@
 
 package ch.pec0ra.mobilityratecalculator;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
 
 public class PricesActivity extends AppCompatActivity {
 

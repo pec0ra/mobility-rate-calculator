@@ -1,5 +1,5 @@
 <!--
-  ~     Copyright (C) 2016 Basile
+  ~     Copyright (C) 2017 Basile Maret
   ~
   ~     This file is part of Mobility Rate Calculator.
   ~
@@ -68,4 +68,18 @@
     <string name="to_time">To</string>
 
     <string name="wrong_format">Wrong format</string>
+
+    <string name="submit">Submit</string>
+    <string name="origin">Origin</string>
+    <string name="destination">Destination</string>
+    <string name="set_as">Set as</string>
+    <string name="set_as_origin">Set as origin</string>
+    <string name="set_as_destination">Set as destination</string>
+    <string name="address_not_found">Address not found</string>
+    <string name="error">Error calculating the distance</string>
+
+    <string name="distance_km">Distance: %d km</string>
+    <string name="no_route_found">No route found</string>
+    <string name="origin_and_destination_cannot_be_emtpy">Origin and destination cannot be empty</string>
+
 </resources>

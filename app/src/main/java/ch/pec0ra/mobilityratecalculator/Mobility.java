@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2016 Basile
+ *     Copyright (C) 2017 Basile Maret
  *
  *     This file is part of Mobility Rate Calculator.
  *
