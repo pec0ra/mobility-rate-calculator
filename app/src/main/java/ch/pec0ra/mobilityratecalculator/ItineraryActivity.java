@@ -29,7 +29,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -197,7 +196,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     private void centerCamera() {
         if(markerA == null && markerB == null){
             // Move the camera to switzerland
-            mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(switzerlandSW, switzerlandNE), 10));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(switzerlandSW, switzerlandNE), 10));
         } else if(markerA == null) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerB.getPosition(), MAP_DEFAULT_ZOOM));
         } else if(markerB == null) {
@@ -257,7 +256,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
         if(event.directionsResult.routes.length > 0) {
-            Log.d(TAG, event.directionsResult.routes[0].summary);
             AnimationUtils.circleReveal(findViewById(R.id.distance_result_card));
             TextView distanceResult = findViewById(R.id.distance_result_textview);
 
@@ -323,13 +321,10 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         mMap.setOnMapLoadedCallback(this::setupMap);
     }
 
     private void setupMap(){
-        // Move the camera to switzerland
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(switzerlandSW, switzerlandNE), 10));
         mMap.setOnMapLongClickListener(new MapLongClickListener());
     }
 
