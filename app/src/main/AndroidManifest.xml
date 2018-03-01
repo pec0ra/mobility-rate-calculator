@@ -30,13 +30,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PricesActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/prices" />
         <activity
             android:name=".SplashActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ItineraryActivity"
+            android:label="@string/itinerary"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.Transparent" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -55,10 +63,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity
-            android:name=".ItineraryActivity"
-            android:label="@string/itinerary"
-            android:theme="@style/AppTheme.Transparent" />
 
         <service
             android:name=".ItineraryService"

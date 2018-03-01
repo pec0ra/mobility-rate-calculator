@@ -96,7 +96,7 @@ public class ItineraryService extends IntentService {
     private GeoApiContext getGeoContext() {
         GeoApiContext geoApiContext = new GeoApiContext();
         return geoApiContext.setQueryRateLimit(3)
-                .setApiKey(getString(R.string.google_directions_key))
+                .setApiKey(getString(R.string.google_maps_key))
                 .setConnectTimeout(1, TimeUnit.SECONDS)
                 .setReadTimeout(1, TimeUnit.SECONDS)
                 .setWriteTimeout(1, TimeUnit.SECONDS);
