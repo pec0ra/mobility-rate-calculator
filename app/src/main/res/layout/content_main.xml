@@ -52,8 +52,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/time_required"
-                    android:id="@+id/time_required_view"/>
+                    android:text="@string/time_required" />
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -69,8 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size"
-                            android:text="@string/from"
-                            android:id="@+id/from_text_view" />
+                            android:text="@string/from" />
 
                         <EditText
                             android:layout_width="match_parent"
@@ -93,8 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size"
-                            android:text="@string/to_time"
-                            android:id="@+id/textView" />
+                            android:text="@string/to_time" />
 
                         <EditText
                             android:layout_width="match_parent"
@@ -132,8 +129,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/planned_mileage"
-                    android:id="@+id/kilometers_text_view"/>
+                    android:text="@string/planned_mileage" />
 
                 <LinearLayout
                     android:orientation="horizontal"

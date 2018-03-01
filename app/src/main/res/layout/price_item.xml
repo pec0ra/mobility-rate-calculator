@@ -36,8 +36,7 @@
         <TableRow
             android:layout_marginBottom="@dimen/card_title_padding"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/category_caption">
+            android:layout_height="match_parent">
 
             <TextView
                 android:textStyle="bold"
@@ -57,23 +56,20 @@
                 android:textSize="@dimen/text_size"
                 android:text="@string/time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView6" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:textSize="@dimen/text_size"
                 android:text="@string/distance"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView4" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:textSize="@dimen/text_size"
                 android:text="@string/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
-                android:id="@+id/textView3" />
+                android:textColor="?android:attr/textColorPrimary" />
         </TableRow>
 
         <TableRow

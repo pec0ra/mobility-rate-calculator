@@ -22,8 +22,6 @@
 
     <string name="from">Von</string>
     <string name="to">Nach</string>
-    <string name="kilometers">Kilometer</string>
-    <string name="category">Kategorie</string>
     <string name="total">Total</string>
     <string name="time">Dauer</string>
     <string name="distance">Distanz</string>
@@ -31,33 +29,18 @@
 
 
     <string name="set_itinerary">Weg eingeben</string>
-    <string name="find_itinerary">Weg finden</string>
     <string name="calculate_distance">Distanz berechnen</string>
     <string name="itinerary">Weg</string>
     <string name="calculating">Berechnung läuft…</string>
     <string name="two_way">Hin- und Rückfahrt</string>
 
-    <string name="cancel">Abbrechen</string>
-    <string name="confirm">Bestätigen</string>
-    <string name="one_way">Einfache Fahrt</string>
-
-    <string name="connexion_error">Verbindungsfehler</string>
-    <string name="no_result_found">Keine Ergebnisse gefunden</string>
-    <string name="invalid_request">Ungültige Anfrage</string>
-
 
     <string name="kilometers_count">%d Kilometer</string>
-    <string name="from_format">Von : %s</string>
-    <string name="to_format">Nach : %s</string>
-    <string name="distance_format">Totale Distanz: %d km</string>
-    <string name="hours_during_the_day">Anzahl Stunden tagsüber</string>
-    <string name="hours_during_the_night">Anzahl Stunden nachts</string>
     <string name="to_time">Bis</string>
 
     <string name="wrong_format">Falsches Format</string>
     <string name="origin">Start</string>
     <string name="destination">Ziel</string>
-    <string name="set_as">Hinzufügen als</string>
     <string name="set_as_origin">Hinzufügen als Start</string>
     <string name="set_as_destination">Hinzufügen als Ziel</string>
     <string name="address_not_found">Die Adresse konnte nicht gefunden werden</string>

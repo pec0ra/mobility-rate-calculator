@@ -19,8 +19,6 @@
 
 package ch.pec0ra.mobilityratecalculator;
 
-import android.util.Log;
-
 import org.junit.Test;
 
 import java.math.BigDecimal;
