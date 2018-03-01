@@ -264,7 +264,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             } else {
                 distanceKM = event.directionsResult.routes[0].legs[0].distance.inMeters / 1000;
             }
-            //
             distanceResult.setText(getResources().getString(R.string.distance_km, distanceKM));
 
             List<LatLng> decodedPath = PolyUtil.decode(event.directionsResult.routes[0].overviewPolyline.getEncodedPath());
