@@ -70,8 +70,8 @@ class RateCalculator implements Serializable{
 
         priceMap = new HashMap<>();
         for(Mobility.Category category : Mobility.Category.values()){
-            BigDecimal dayHoursPrice = Mobility.getDayHourlyRate(category).multiply(new BigDecimal(dayHalfHoursCount).divide(new BigDecimal(2), RoundingMode.HALF_UP));
-            BigDecimal nightHoursPrice = Mobility.getNightHourlyRate(category).multiply(new BigDecimal(nightHalfHoursCount).divide(new BigDecimal(2), RoundingMode.HALF_UP));
+            BigDecimal dayHoursPrice = Mobility.getDayHourlyRate(category).multiply(new BigDecimal(dayHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
+            BigDecimal nightHoursPrice = Mobility.getNightHourlyRate(category).multiply(new BigDecimal(nightHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
 
             BigDecimal highRateKmsPrice = Mobility.getHighKmsRate(category).multiply(new BigDecimal(highRateKms));
             BigDecimal lowRateKmsPrice = Mobility.getLowKmsRate(category).multiply(new BigDecimal(lowRateKms));
