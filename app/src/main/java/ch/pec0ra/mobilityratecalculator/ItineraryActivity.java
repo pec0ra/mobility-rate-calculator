@@ -146,7 +146,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     private void openPlaceAutocompleteActivity(int request_code, String address) {
         try {
             Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                    .zzim(address)
+                    .zzh(address)
                     .setBoundsBias(new LatLngBounds(switzerlandSW, switzerlandNE))
                     .build(this);
             startActivityForResult(intent, request_code);
