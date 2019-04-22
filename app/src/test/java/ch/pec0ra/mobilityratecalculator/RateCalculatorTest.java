@@ -25,6 +25,8 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import ch.pec0ra.mobilityratecalculator.rates.Mobility;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -52,7 +54,7 @@ public class RateCalculatorTest {
         for(int i=1; i <= 48; i++) {
             for(float j=1f; j <= 80; j+=0.5f) {
 
-                RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms);
+                RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms, mobilityRate);
                 rateCalculator.calculate();
 
                 RateCalculator.Price priceBudget = rateCalculator.getPrice(Mobility.Category.BUDGET);
@@ -97,7 +99,7 @@ public class RateCalculatorTest {
 
         for(; kms <= 200; kms++){
 
-            RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms);
+            RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms, mobilityRate);
             rateCalculator.calculate();
 
             RateCalculator.Price priceBudget = rateCalculator.getPrice(Mobility.Category.BUDGET);
@@ -135,7 +137,7 @@ public class RateCalculatorTest {
             for(float j=1f; j <= 80; j+=0.5f) {
                 for(; kms <= 200; kms++) {
 
-                    RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms);
+                    RateCalculator rateCalculator = new RateCalculator(fromDate, toDate, kms, mobilityRate);
                     rateCalculator.calculate();
 
                     RateCalculator.Price priceBudget = rateCalculator.getPrice(Mobility.Category.BUDGET);

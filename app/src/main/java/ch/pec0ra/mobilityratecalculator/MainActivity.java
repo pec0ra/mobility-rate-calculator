@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
     Calendar toDate;
     Calendar tmpDate;
 
-    ProgressDialog dialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,18 +99,6 @@ public class MainActivity extends AppCompatActivity {
         fromField.setOnClickListener(new MyClickListener(true));
         toField.setOnClickListener(new MyClickListener(false));
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -227,63 +213,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        startLoad(getString(R.string.calculating));
-        new CalculateAsyncTask(fromDate, toDate, kms).execute();
+        showPrices(fromDate, toDate, kms);
     }
 
-    private void showPrices(RateCalculator rateCalculator) {
+    private void showPrices(Calendar fromDate, Calendar toDate, int kms) {
         Intent intent = new Intent(this, PricesActivity.class);
-        intent.putExtra(PricesActivity.RATE_CALCULATOR_EXTRA, rateCalculator);
+        intent.putExtra(PricesActivity.FROM_DATE_EXTRA, fromDate);
+        intent.putExtra(PricesActivity.TO_DATE_EXTRA, toDate);
+        intent.putExtra(PricesActivity.DISTANCE_EXTRA, kms);
         startActivity(intent);
-    }
-
-    private void startLoad(String message) {
-        if (dialog != null) {
-            dialog.dismiss();
-        }
-        dialog = ProgressDialog.show(this, "", message, true, false);
-    }
-
-    private void endLoad() {
-        if (dialog != null) {
-            dialog.dismiss();
-        }
-        dialog = null;
-    }
-
-    @Subscribe
-    public void onEvent(CalculationFinishedEvent event) {
-        showPrices(event.rateCalculator);
-        endLoad();
-    }
-
-    private static class CalculateAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private final RateCalculator rateCalculator;
-
-        CalculateAsyncTask(Calendar fromDate, Calendar toDate, int kms) {
-            rateCalculator = new RateCalculator(fromDate, toDate, kms);
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            rateCalculator.calculate();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            EventBus.getDefault().post(new CalculationFinishedEvent(rateCalculator));
-        }
-    }
-
-    private static class CalculationFinishedEvent {
-        final RateCalculator rateCalculator;
-
-        CalculationFinishedEvent(RateCalculator rateCalculator) {
-            this.rateCalculator = rateCalculator;
-        }
     }
 
 }

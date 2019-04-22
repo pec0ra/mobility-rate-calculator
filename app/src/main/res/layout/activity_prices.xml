@@ -32,6 +32,24 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:text="@string/mobility_subscription"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+        <Spinner
+            android:id="@+id/subscription_spinner"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:text="@string/trip"
@@ -46,7 +64,8 @@
             android:layout_marginBottom="@dimen/content_padding"
             app:contentPadding="@dimen/content_padding"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/journey_container">
 
             <LinearLayout
                 android:layout_width="match_parent"

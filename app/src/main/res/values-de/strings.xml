@@ -52,4 +52,5 @@
     <string name="time_h_m_format">{0,choice,0#|1#1 Stunde\u0020|1&lt;{0} Stunden\u0020}{1,choice,0#|1&lt;{1} Minuten}</string>
     <string name="time_required">Benötige Zeit</string>
     <string name="planned_mileage">Geplante Kilometer</string>
+    <string name="mobility_subscription">Mobility Abo</string>
 </resources>

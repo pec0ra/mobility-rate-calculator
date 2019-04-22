@@ -65,5 +65,7 @@
     <string name="time_h_m_format">{0,choice,0#|1#1 hour\u0020|1&lt;{0} hours\u0020}{1,choice,0#|1&lt;{1} minutes}</string>
     <string name="planned_mileage">Planned mileage</string>
     <string name="time_required">Time required</string>
+    <string name="customer_type" translatable="false">customer_type_shared_pref</string>
+    <string name="mobility_subscription">Mobility Subscription</string>
 
 </resources>

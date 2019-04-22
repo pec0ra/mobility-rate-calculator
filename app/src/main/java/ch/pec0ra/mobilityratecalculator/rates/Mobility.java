@@ -17,18 +17,20 @@
  *     along with Mobility Rate Calculator.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ch.pec0ra.mobilityratecalculator;
+package ch.pec0ra.mobilityratecalculator.rates;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public final class Mobility {
+import ch.pec0ra.mobilityratecalculator.R;
 
+public abstract class Mobility {
 
     public enum Category {
         BUDGET,
@@ -42,12 +44,49 @@ public final class Mobility {
         TRANSPORT
     }
 
+    public enum SubscriptionType {
+        PRIVATE(new PrivateRate(), 0),
+        BUSINESS(new BusinessRate(), 1),
+        CLICK_DRIVE(new ClickDriveRate(), 2),
+        BUSINESS_LITE(new BusinessLiteRate(), 3);
+
+        private final Mobility rate;
+        private int intValue;
+
+        SubscriptionType(Mobility rate, int intValue) {
+            this.rate = rate;
+            this.intValue = intValue;
+        }
+
+        public static SubscriptionType fromInt(int value) {
+            if (value == PRIVATE.intValue) {
+                return PRIVATE;
+            } else if (value == BUSINESS.intValue) {
+                return BUSINESS;
+            } else if (value == CLICK_DRIVE.intValue) {
+                return CLICK_DRIVE;
+            } else if (value == BUSINESS_LITE.intValue) {
+                return BUSINESS_LITE;
+            } else {
+                return PRIVATE;
+            }
+        }
+
+        public Mobility getRate() {
+            return rate;
+        }
+
+        public int getIntValue() {
+            return intValue;
+        }
+    }
+
     private static final int DAY_RATE_START = 7;
     private static final int DAY_RATE_END = 22;
     // Rates are not lower after 100km anymore so we use the highest value possible
-    static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
+    public static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
 
-    static boolean isDayHour(int hour) {
+    public static boolean isDayHour(int hour) {
         return hour >= DAY_RATE_START && hour <= DAY_RATE_END;
     }
 
@@ -55,62 +94,57 @@ public final class Mobility {
         return km < KM_HIGH_RATE_END;
     }
 
-    private static Map<Category, Rate> ratesMap;
+    @NotNull
+    private Map<Category, Rate> ratesMap;
 
-    static {
-        ratesMap = new HashMap<>();
-        ratesMap.put(Category.BUDGET, new Rate(new BigDecimal("2.0"), new BigDecimal("2.0"), new BigDecimal("0.55"), new BigDecimal("0.55")));
-        ratesMap.put(Category.MICRO, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
-        ratesMap.put(Category.ECONOMY, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
-        ratesMap.put(Category.ELECTRO, new Rate(new BigDecimal("2.5"), new BigDecimal("2.5"), new BigDecimal("0.65"), new BigDecimal("0.65")));
-        ratesMap.put(Category.COMBI, new Rate(new BigDecimal("3.0"), new BigDecimal("3.0"), new BigDecimal("0.8"), new BigDecimal("0.8")));
-        ratesMap.put(Category.CABRIO, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
-        ratesMap.put(Category.EMOTION, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
-        ratesMap.put(Category.MINIVAN, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
-        ratesMap.put(Category.TRANSPORT, new Rate(new BigDecimal("4.0"), new BigDecimal("4.0"), new BigDecimal("0.95"), new BigDecimal("0.95")));
+    Mobility() {
+        ratesMap = initRetMap();
     }
 
-    static BigDecimal getDayHourlyRate(Category category) {
-        return ratesMap.get(category).hourlyRateDay;
+    @NotNull
+    abstract HashMap<Category, Rate> initRetMap();
+
+    public BigDecimal getDayHourlyRate(Category category) {
+        return Objects.requireNonNull(ratesMap.get(category)).hourlyRateDay;
     }
 
-    static BigDecimal getNightHourlyRate(Category category) {
-        return ratesMap.get(category).hourlyRateNight;
+    public BigDecimal getNightHourlyRate(Category category) {
+        return Objects.requireNonNull(ratesMap.get(category)).hourlyRateNight;
     }
 
-    static BigDecimal getHighKmsRate(Category category) {
-        return ratesMap.get(category).KMRateHigh;
+    public BigDecimal getHighKmsRate(Category category) {
+        return Objects.requireNonNull(ratesMap.get(category)).KMRateHigh;
     }
 
-    static BigDecimal getLowKmsRate(Category category) {
-        return ratesMap.get(category).KMRateLow;
+    public BigDecimal getLowKmsRate(Category category) {
+        return Objects.requireNonNull(ratesMap.get(category)).KMRateLow;
     }
 
-    public static BigDecimal getHourRate(Category category, int hour) {
+    public BigDecimal getHourRate(Category category, int hour) {
         if (isDayHour(hour)) {
-            return ratesMap.get(category).hourlyRateDay;
+            return Objects.requireNonNull(ratesMap.get(category)).hourlyRateDay;
         } else {
-            return ratesMap.get(category).hourlyRateNight;
+            return Objects.requireNonNull(ratesMap.get(category)).hourlyRateNight;
         }
     }
 
-    public static BigDecimal getKMRate(Category category, int kms) {
+    public BigDecimal getKMRate(Category category, int kms) {
         if (isKMLow(kms)) {
-            return ratesMap.get(category).KMRateLow.multiply(new BigDecimal(kms));
+            return Objects.requireNonNull(ratesMap.get(category)).KMRateLow.multiply(BigDecimal.valueOf(kms));
         } else {
-            Rate r = ratesMap.get(category);
-            return r.KMRateLow.multiply(new BigDecimal(100)).add(r.KMRateHigh.multiply(new BigDecimal(kms - 100)));
+            Rate r = Objects.requireNonNull(ratesMap.get(category));
+            return r.KMRateLow.multiply(BigDecimal.valueOf(100)).add(r.KMRateHigh.multiply(BigDecimal.valueOf(kms - 100)));
         }
     }
 
 
-    private static class Rate {
+    protected static class Rate {
         final BigDecimal hourlyRateDay;
         final BigDecimal hourlyRateNight;
         final BigDecimal KMRateHigh;
         final BigDecimal KMRateLow;
 
-        private Rate(BigDecimal hourlyRateDay, BigDecimal hourlyRateNight, BigDecimal kmRateHigh, BigDecimal kmRateLow) {
+        Rate(BigDecimal hourlyRateDay, BigDecimal hourlyRateNight, BigDecimal kmRateHigh, BigDecimal kmRateLow) {
             this.hourlyRateDay = hourlyRateDay;
             this.hourlyRateNight = hourlyRateNight;
             KMRateHigh = kmRateHigh;
@@ -118,22 +152,7 @@ public final class Mobility {
         }
     }
 
-    public static SpinnerAdapter getCategorySpinnerAdapter(Context context) {
-        String[] items = new String[]{
-                context.getString(R.string.budget),
-                context.getString(R.string.micro),
-                context.getString(R.string.economy),
-                context.getString(R.string.electro),
-                context.getString(R.string.combi),
-                context.getString(R.string.cabrio),
-                context.getString(R.string.emotion),
-                context.getString(R.string.minivan),
-                context.getString(R.string.transport)
-        };
-        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
-    }
-
-    static String categoryToString(Category category, Context context) {
+    public static String categoryToString(Category category, Context context) {
         switch (category) {
             case BUDGET:
                 return context.getString(R.string.budget);

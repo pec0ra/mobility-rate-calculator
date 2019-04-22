@@ -48,4 +48,5 @@
     <string name="time_h_m_format">{0,choice,0#|1#1 heure\u0020|1&lt;{0} heures\u0020}{1,choice,0#|1&lt;{1} minutes}</string>
     <string name="time_required">Temps nécessaire</string>
     <string name="planned_mileage">Kilomètres prévus</string>
+    <string name="mobility_subscription">Abonnement Mobility</string>
 </resources>

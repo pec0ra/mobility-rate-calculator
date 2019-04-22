@@ -26,6 +26,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.pec0ra.mobilityratecalculator.rates.Mobility;
+
 class RateCalculator implements Serializable {
 
     private static final long HALF_HOUR_IN_MS = 1800000;
@@ -41,11 +43,13 @@ class RateCalculator implements Serializable {
     private int lowRateKms;
 
     private Map<Mobility.Category, Price> priceMap;
+    private Mobility mobilityRate;
 
-    RateCalculator(Calendar startDate, Calendar endDate, int kms) {
+    RateCalculator(Calendar startDate, Calendar endDate, int kms, Mobility mobilityRate) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.kms = kms;
+        this.mobilityRate = mobilityRate;
     }
 
     void calculate() {
@@ -70,11 +74,11 @@ class RateCalculator implements Serializable {
 
         priceMap = new HashMap<>();
         for (Mobility.Category category : Mobility.Category.values()) {
-            BigDecimal dayHoursPrice = Mobility.getDayHourlyRate(category).multiply(new BigDecimal(dayHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
-            BigDecimal nightHoursPrice = Mobility.getNightHourlyRate(category).multiply(new BigDecimal(nightHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
+            BigDecimal dayHoursPrice = mobilityRate.getDayHourlyRate(category).multiply(new BigDecimal(dayHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
+            BigDecimal nightHoursPrice = mobilityRate.getNightHourlyRate(category).multiply(new BigDecimal(nightHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
 
-            BigDecimal highRateKmsPrice = Mobility.getHighKmsRate(category).multiply(new BigDecimal(highRateKms));
-            BigDecimal lowRateKmsPrice = Mobility.getLowKmsRate(category).multiply(new BigDecimal(lowRateKms));
+            BigDecimal highRateKmsPrice = mobilityRate.getHighKmsRate(category).multiply(new BigDecimal(highRateKms));
+            BigDecimal lowRateKmsPrice = mobilityRate.getLowKmsRate(category).multiply(new BigDecimal(lowRateKms));
 
             Price price = new Price(dayHoursPrice, nightHoursPrice, highRateKmsPrice, lowRateKmsPrice);
             priceMap.put(category, price);
