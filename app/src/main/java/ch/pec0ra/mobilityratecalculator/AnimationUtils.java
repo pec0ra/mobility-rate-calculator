@@ -39,10 +39,11 @@ class AnimationUtils {
     static final String CENTER_Y_EXTRA = "CENTER_Y_EXTRA";
     static final String ANIMATION_COLOR = "ANIMATION_COLOR";
 
-    static void circleReveal(View view){
+    static void circleReveal(View view) {
         circleReveal(view, 0);
     }
-    private static void circleReveal(View view, int delay){
+
+    private static void circleReveal(View view, int delay) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // get the center for the clipping circle
             int cx = view.getWidth() / 2;
@@ -59,12 +60,18 @@ class AnimationUtils {
                 public void onAnimationStart(Animator animation) {
                     view.setVisibility(View.VISIBLE);
                 }
+
                 @Override
-                public void onAnimationEnd(Animator animation) {}
+                public void onAnimationEnd(Animator animation) {
+                }
+
                 @Override
-                public void onAnimationCancel(Animator animation) {}
+                public void onAnimationCancel(Animator animation) {
+                }
+
                 @Override
-                public void onAnimationRepeat(Animator animation) {}
+                public void onAnimationRepeat(Animator animation) {
+                }
             });
             anim.start();
         } else {
@@ -111,13 +118,14 @@ class AnimationUtils {
     }
 
     @Parcel
-    static class RevealAnimationSetting{
+    static class RevealAnimationSetting {
         int centerX;
         int centerY;
         int startColor;
         int endColor;
 
-        RevealAnimationSetting(){}
+        RevealAnimationSetting() {
+        }
 
         RevealAnimationSetting(int centerX, int centerY, int startColor, int endColor) {
             this.centerX = centerX;

@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-class RateCalculator implements Serializable{
+class RateCalculator implements Serializable {
 
     private static final long HALF_HOUR_IN_MS = 1800000;
 
@@ -42,22 +42,22 @@ class RateCalculator implements Serializable{
 
     private Map<Mobility.Category, Price> priceMap;
 
-    RateCalculator(Calendar startDate, Calendar endDate, int kms){
+    RateCalculator(Calendar startDate, Calendar endDate, int kms) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.kms = kms;
     }
 
-    void calculate(){
+    void calculate() {
         roundTimes();
         Calendar cal = Calendar.getInstance();
         cal.setTime(startDate.getTime());
 
         dayHalfHoursCount = 0;
         nightHalfHoursCount = 0;
-        while(cal.getTimeInMillis() < endDate.getTimeInMillis()){
+        while (cal.getTimeInMillis() < endDate.getTimeInMillis()) {
             int hour = cal.get(Calendar.HOUR_OF_DAY);
-            if(Mobility.isDayHour(hour)){
+            if (Mobility.isDayHour(hour)) {
                 dayHalfHoursCount++;
             } else {
                 nightHalfHoursCount++;
@@ -69,7 +69,7 @@ class RateCalculator implements Serializable{
         lowRateKms = Math.max(kms - Mobility.KM_HIGH_RATE_END, 0);
 
         priceMap = new HashMap<>();
-        for(Mobility.Category category : Mobility.Category.values()){
+        for (Mobility.Category category : Mobility.Category.values()) {
             BigDecimal dayHoursPrice = Mobility.getDayHourlyRate(category).multiply(new BigDecimal(dayHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
             BigDecimal nightHoursPrice = Mobility.getNightHourlyRate(category).multiply(new BigDecimal(nightHalfHoursCount)).divide(new BigDecimal(2), 2, RoundingMode.HALF_EVEN);
 
@@ -81,33 +81,35 @@ class RateCalculator implements Serializable{
         }
     }
 
-    int getMinutesCount(){
-        if((nightHalfHoursCount + dayHalfHoursCount) % 2 == 1){
+    int getMinutesCount() {
+        if ((nightHalfHoursCount + dayHalfHoursCount) % 2 == 1) {
             return 30;
         } else {
             return 0;
         }
     }
-    int getTotalHoursCount(){
+
+    int getTotalHoursCount() {
         return new BigDecimal(dayHalfHoursCount + nightHalfHoursCount).divide(new BigDecimal(2), RoundingMode.DOWN).intValue();
     }
-    int getTotalKilometersCount(){
+
+    int getTotalKilometersCount() {
         return highRateKms + lowRateKms;
     }
 
 
-    Price getPrice(Mobility.Category category){
+    Price getPrice(Mobility.Category category) {
         return priceMap.get(category);
     }
 
-    private void roundTimes(){
-        long roundedStartTime = (long) (Math.floor((double)startDate.getTimeInMillis() / (double)HALF_HOUR_IN_MS) * HALF_HOUR_IN_MS);
-        long roundedEndTime = (long) (Math.ceil((double)endDate.getTimeInMillis() / (double)HALF_HOUR_IN_MS) * HALF_HOUR_IN_MS);
+    private void roundTimes() {
+        long roundedStartTime = (long) (Math.floor((double) startDate.getTimeInMillis() / (double) HALF_HOUR_IN_MS) * HALF_HOUR_IN_MS);
+        long roundedEndTime = (long) (Math.ceil((double) endDate.getTimeInMillis() / (double) HALF_HOUR_IN_MS) * HALF_HOUR_IN_MS);
         startDate.setTimeInMillis(roundedStartTime);
         endDate.setTimeInMillis(roundedEndTime);
     }
 
-    class Price implements Serializable{
+    class Price implements Serializable {
         final BigDecimal dayHoursPrice;
         final BigDecimal nightHoursPrice;
 
@@ -121,14 +123,15 @@ class RateCalculator implements Serializable{
             this.lowRateKmsPrice = lowRateKmsPrice;
         }
 
-        BigDecimal getTotalPrice(){
+        BigDecimal getTotalPrice() {
             return dayHoursPrice.add(nightHoursPrice).add(highRateKmsPrice).add(lowRateKmsPrice);
         }
 
-        BigDecimal getTimePrice(){
+        BigDecimal getTimePrice() {
             return dayHoursPrice.add(nightHoursPrice);
         }
-        BigDecimal getDistancePrice(){
+
+        BigDecimal getDistancePrice() {
             return highRateKmsPrice.add(lowRateKmsPrice);
         }
     }

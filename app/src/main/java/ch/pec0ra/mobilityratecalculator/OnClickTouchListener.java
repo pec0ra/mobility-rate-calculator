@@ -33,19 +33,19 @@ public abstract class OnClickTouchListener implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             startX = (int) event.getX();
             startY = (int) event.getY();
         }
 
-        if(event.getAction() == MotionEvent.ACTION_UP){
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             int endX = (int) event.getX();
             int endY = (int) event.getY();
             int dX = Math.abs(endX - startX);
             int dY = Math.abs(endY - startY);
 
             double touchSlop = ViewConfiguration.get(v.getContext()).getScaledTouchSlop();
-            if(Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) <= touchSlop){
+            if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) <= touchSlop) {
                 positionX = (int) event.getRawX();
                 positionY = (int) event.getRawY() - v.getContext().getResources().getDimensionPixelOffset(R.dimen.toolbar_height) - getStatusBarHeight(v.getContext());
                 onClick(v);
@@ -54,10 +54,11 @@ public abstract class OnClickTouchListener implements View.OnTouchListener {
         return false;
     }
 
-    int getX(){
+    int getX() {
         return positionX;
     }
-    int getY(){
+
+    int getY() {
         return positionY;
     }
 

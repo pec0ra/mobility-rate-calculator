@@ -62,7 +62,7 @@ public class ItineraryService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_CALCULATE_DISTANCE.equals(action)){
+            if (ACTION_CALCULATE_DISTANCE.equals(action)) {
                 double[] array = intent.getDoubleArrayExtra(EXTRA_ORIGIN);
                 final com.google.maps.model.LatLng origin = new com.google.maps.model.LatLng(array[0], array[1]);
                 array = intent.getDoubleArrayExtra(EXTRA_DESTINATION);

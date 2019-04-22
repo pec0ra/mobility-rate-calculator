@@ -30,7 +30,6 @@ import java.util.Map;
 public final class Mobility {
 
 
-
     public enum Category {
         BUDGET,
         MICRO,
@@ -48,14 +47,16 @@ public final class Mobility {
     // Rates are not lower after 100km anymore so we use the highest value possible
     static final int KM_HIGH_RATE_END = Integer.MAX_VALUE;
 
-    static boolean isDayHour(int hour){
+    static boolean isDayHour(int hour) {
         return hour >= DAY_RATE_START && hour <= DAY_RATE_END;
     }
-    private static boolean isKMLow(int km){
+
+    private static boolean isKMLow(int km) {
         return km < KM_HIGH_RATE_END;
     }
 
     private static Map<Category, Rate> ratesMap;
+
     static {
         ratesMap = new HashMap<>();
         ratesMap.put(Category.BUDGET, new Rate(new BigDecimal("2.0"), new BigDecimal("2.0"), new BigDecimal("0.55"), new BigDecimal("0.55")));
@@ -72,25 +73,29 @@ public final class Mobility {
     static BigDecimal getDayHourlyRate(Category category) {
         return ratesMap.get(category).hourlyRateDay;
     }
+
     static BigDecimal getNightHourlyRate(Category category) {
         return ratesMap.get(category).hourlyRateNight;
     }
+
     static BigDecimal getHighKmsRate(Category category) {
         return ratesMap.get(category).KMRateHigh;
     }
+
     static BigDecimal getLowKmsRate(Category category) {
         return ratesMap.get(category).KMRateLow;
     }
 
-    public static BigDecimal getHourRate(Category category, int hour){
-        if(isDayHour(hour)) {
+    public static BigDecimal getHourRate(Category category, int hour) {
+        if (isDayHour(hour)) {
             return ratesMap.get(category).hourlyRateDay;
         } else {
             return ratesMap.get(category).hourlyRateNight;
         }
     }
+
     public static BigDecimal getKMRate(Category category, int kms) {
-        if(isKMLow(kms)){
+        if (isKMLow(kms)) {
             return ratesMap.get(category).KMRateLow.multiply(new BigDecimal(kms));
         } else {
             Rate r = ratesMap.get(category);
@@ -112,23 +117,24 @@ public final class Mobility {
             KMRateLow = kmRateLow;
         }
     }
-    public static SpinnerAdapter getCategorySpinnerAdapter(Context context){
+
+    public static SpinnerAdapter getCategorySpinnerAdapter(Context context) {
         String[] items = new String[]{
-            context.getString(R.string.budget),
-            context.getString(R.string.micro),
-            context.getString(R.string.economy),
-            context.getString(R.string.electro),
-            context.getString(R.string.combi),
-            context.getString(R.string.cabrio),
-            context.getString(R.string.emotion),
-            context.getString(R.string.minivan),
-            context.getString(R.string.transport)
+                context.getString(R.string.budget),
+                context.getString(R.string.micro),
+                context.getString(R.string.economy),
+                context.getString(R.string.electro),
+                context.getString(R.string.combi),
+                context.getString(R.string.cabrio),
+                context.getString(R.string.emotion),
+                context.getString(R.string.minivan),
+                context.getString(R.string.transport)
         };
         return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
     }
 
-    static String categoryToString(Category category, Context context){
-        switch (category){
+    static String categoryToString(Category category, Context context) {
+        switch (category) {
             case BUDGET:
                 return context.getString(R.string.budget);
             case MICRO:
@@ -153,7 +159,7 @@ public final class Mobility {
     }
 
     public static Category getCategoryFromPos(int selectedItemPosition) {
-        switch (selectedItemPosition){
+        switch (selectedItemPosition) {
             case 0:
                 return Category.BUDGET;
             case 1:

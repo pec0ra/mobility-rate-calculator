@@ -46,7 +46,7 @@ import static ch.pec0ra.mobilityratecalculator.AnimationUtils.CENTER_X_EXTRA;
 import static ch.pec0ra.mobilityratecalculator.AnimationUtils.CENTER_Y_EXTRA;
 import static ch.pec0ra.mobilityratecalculator.ItineraryActivity.DISTANCE_EXTRA;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_DISTANCE = 4;
 
@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity{
         kmInput = findViewById(R.id.kilometers_input);
 
         fromDate = Calendar.getInstance();
-        long roundedTime = (long) (Math.ceil((double)fromDate.getTimeInMillis() / (double)TimeUnit.MINUTES.toMillis(30)) * TimeUnit.MINUTES.toMillis(30));
+        long roundedTime = (long) (Math.ceil((double) fromDate.getTimeInMillis() / (double) TimeUnit.MINUTES.toMillis(30)) * TimeUnit.MINUTES.toMillis(30));
         fromDate.setTimeInMillis(roundedTime);
         toDate = Calendar.getInstance();
         toDate.setTimeInMillis(roundedTime + TimeUnit.HOURS.toMillis(1));
 
-        findViewById(R.id.itinerary_button).setOnTouchListener(new OnClickTouchListener(){
+        findViewById(R.id.itinerary_button).setOnTouchListener(new OnClickTouchListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ItineraryActivity.class);
@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity{
         private final boolean isStart;
         private final Calendar cal;
 
-        MyClickListener(boolean isStart){
+        MyClickListener(boolean isStart) {
             this.isStart = isStart;
-            if(isStart){
+            if (isStart) {
                 this.cal = fromDate;
             } else {
                 this.cal = toDate;
@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity{
         private final Calendar cal;
         private final boolean isStart;
 
-        MyDateSetListener(boolean isStart){
+        MyDateSetListener(boolean isStart) {
             this.isStart = isStart;
-            if(isStart){
+            if (isStart) {
                 this.cal = fromDate;
             } else {
                 this.cal = toDate;
@@ -173,13 +173,14 @@ public class MainActivity extends AppCompatActivity{
             dialog.show(getFragmentManager(), TIME_PICKER_DIALOG);
         }
     }
+
     private class MyTimeSetListener implements TimePickerDialog.OnTimeSetListener {
         private final Calendar cal;
         private final boolean isStart;
 
-        MyTimeSetListener(boolean isStart){
+        MyTimeSetListener(boolean isStart) {
             this.isStart = isStart;
-            if(isStart){
+            if (isStart) {
                 this.cal = fromDate;
             } else {
                 this.cal = toDate;
@@ -201,12 +202,12 @@ public class MainActivity extends AppCompatActivity{
 
     private void correctDates(boolean isStart) {
         long difference = toDate.getTimeInMillis() - fromDate.getTimeInMillis();
-        if(isStart){
-            if(difference < TimeUnit.HOURS.toMillis(1)){
+        if (isStart) {
+            if (difference < TimeUnit.HOURS.toMillis(1)) {
                 toDate.setTimeInMillis(fromDate.getTimeInMillis() + TimeUnit.HOURS.toMillis(1));
             }
         } else {
-            if(difference < TimeUnit.HOURS.toMillis(1)){
+            if (difference < TimeUnit.HOURS.toMillis(1)) {
                 fromDate.setTimeInMillis(toDate.getTimeInMillis() - TimeUnit.HOURS.toMillis(1));
             }
         }
@@ -221,7 +222,7 @@ public class MainActivity extends AppCompatActivity{
         int kms;
         try {
             kms = Integer.parseInt(kmInput.getText().toString());
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             kmInput.setError(getString(R.string.wrong_format));
             return;
         }
@@ -236,30 +237,31 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    private void startLoad(String message){
-        if(dialog != null){
+    private void startLoad(String message) {
+        if (dialog != null) {
             dialog.dismiss();
         }
         dialog = ProgressDialog.show(this, "", message, true, false);
     }
-    private void endLoad(){
-        if(dialog != null) {
+
+    private void endLoad() {
+        if (dialog != null) {
             dialog.dismiss();
         }
         dialog = null;
     }
 
     @Subscribe
-    public void onEvent(CalculationFinishedEvent event){
+    public void onEvent(CalculationFinishedEvent event) {
         showPrices(event.rateCalculator);
         endLoad();
     }
 
-    private static class CalculateAsyncTask extends AsyncTask<Void, Void, Void>{
+    private static class CalculateAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private final RateCalculator rateCalculator;
 
-        CalculateAsyncTask(Calendar fromDate, Calendar toDate, int kms){
+        CalculateAsyncTask(Calendar fromDate, Calendar toDate, int kms) {
             rateCalculator = new RateCalculator(fromDate, toDate, kms);
         }
 

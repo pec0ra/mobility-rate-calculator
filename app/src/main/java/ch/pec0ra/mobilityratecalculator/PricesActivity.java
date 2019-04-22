@@ -48,33 +48,33 @@ public class PricesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prices);
 
         ActionBar toolbar = getSupportActionBar();
-        if(toolbar != null){
+        if (toolbar != null) {
             toolbar.setDisplayHomeAsUpEnabled(true);
         }
 
         rateCalculator = (RateCalculator) getIntent().getSerializableExtra(RATE_CALCULATOR_EXTRA);
 
         String duration = MessageFormat.format(getResources().getText(R.string.time_h_m_format).toString(), rateCalculator.getTotalHoursCount(), rateCalculator.getMinutesCount());
-        ((TextView)findViewById(R.id.duration_text)).setText(duration);
-        ((TextView)findViewById(R.id.kilometers_text)).setText(getString(R.string.kilometers_count, rateCalculator.getTotalKilometersCount()));
+        ((TextView) findViewById(R.id.duration_text)).setText(duration);
+        ((TextView) findViewById(R.id.kilometers_text)).setText(getString(R.string.kilometers_count, rateCalculator.getTotalKilometersCount()));
 
         addPriceLayouts();
     }
 
-    private void addPriceLayouts(){
+    private void addPriceLayouts() {
         LinearLayout pricesContainer = findViewById(R.id.prices_container);
-        if(pricesContainer == null){
+        if (pricesContainer == null) {
             return;
         }
-        for(Mobility.Category category : Mobility.Category.values()){
+        for (Mobility.Category category : Mobility.Category.values()) {
             LayoutInflater inflater = LayoutInflater.from(getBaseContext());
             View v = inflater.inflate(R.layout.price_item, pricesContainer, false);
 
-            ((TextView)v.findViewById(R.id.category_name)).setText(Mobility.categoryToString(category, getBaseContext()));
+            ((TextView) v.findViewById(R.id.category_name)).setText(Mobility.categoryToString(category, getBaseContext()));
             RateCalculator.Price price = rateCalculator.getPrice(category);
-            ((TextView)v.findViewById(R.id.time_price)).setText(getString(R.string.chf, moneyDF.format(price.getTimePrice())));
-            ((TextView)v.findViewById(R.id.distance_price)).setText(getString(R.string.chf, moneyDF.format(price.getDistancePrice())));
-            ((TextView)v.findViewById(R.id.total_price)).setText(getString(R.string.chf, moneyDF.format(price.getTotalPrice())));
+            ((TextView) v.findViewById(R.id.time_price)).setText(getString(R.string.chf, moneyDF.format(price.getTimePrice())));
+            ((TextView) v.findViewById(R.id.distance_price)).setText(getString(R.string.chf, moneyDF.format(price.getDistancePrice())));
+            ((TextView) v.findViewById(R.id.total_price)).setText(getString(R.string.chf, moneyDF.format(price.getTotalPrice())));
 
             pricesContainer.addView(v);
         }
