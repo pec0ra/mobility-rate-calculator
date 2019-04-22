@@ -28,8 +28,8 @@ android {
         applicationId "ch.pec0ra.mobilityratecalculator"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 11
-        versionName "3.0"
+        versionCode 12
+        versionName "3.1"
         setProperty("archivesBaseName", "MobilityRateCalculator-$versionName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
