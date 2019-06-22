@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             DatePickerDialog dialog = DatePickerDialog.newInstance(new MyDateSetListener(isStart), cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
             dialog.setMinDate(Calendar.getInstance());
-            dialog.show(getFragmentManager(), DATE_PICKER_DIALOG);
+            dialog.show(getSupportFragmentManager(), DATE_PICKER_DIALOG);
         }
     }
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             tmpDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             TimePickerDialog dialog = TimePickerDialog.newInstance(new MyTimeSetListener(isStart), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
             dialog.setTimeInterval(1, 30);
-            dialog.show(getFragmentManager(), TIME_PICKER_DIALOG);
+            dialog.show(getSupportFragmentManager(), TIME_PICKER_DIALOG);
         }
     }
 

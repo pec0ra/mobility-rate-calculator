@@ -67,6 +67,7 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation group: 'com.github.seratch', name: 'java-time-backport', version: '1.0.0'
 }
 repositories {
     mavenCentral()
