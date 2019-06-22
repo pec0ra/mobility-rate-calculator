@@ -33,7 +33,8 @@ class BusinessRate : Mobility() {
                 Category.CABRIO to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.88"), BigDecimal("0.88")),
                 Category.EMOTION to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.88"), BigDecimal("0.88")),
                 Category.MINIVAN to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.88"), BigDecimal("0.88")),
-                Category.TRANSPORT to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.88"), BigDecimal("0.88"))
+                Category.TRANSPORT to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.88"), BigDecimal("0.88")),
+                Category.PREMIUM to Rate(BigDecimal("8.36"), BigDecimal("8.36"), BigDecimal("1.39"), BigDecimal("1.39"))
         )
         return ratesMap
     }

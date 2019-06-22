@@ -33,7 +33,8 @@ class ClickDriveRate : Mobility() {
                 Category.CABRIO to Rate(BigDecimal("5"), BigDecimal("5"), BigDecimal("1.05"), BigDecimal("1.05")),
                 Category.EMOTION to Rate(BigDecimal("5"), BigDecimal("5"), BigDecimal("1.05"), BigDecimal("1.05")),
                 Category.MINIVAN to Rate(BigDecimal("5"), BigDecimal("5"), BigDecimal("1.05"), BigDecimal("1.05")),
-                Category.TRANSPORT to Rate(BigDecimal("5"), BigDecimal("5"), BigDecimal("1.05"), BigDecimal("1.05"))
+                Category.TRANSPORT to Rate(BigDecimal("5"), BigDecimal("5"), BigDecimal("1.05"), BigDecimal("1.05")),
+                Category.PREMIUM to Rate(BigDecimal("10.0"), BigDecimal("10.0"), BigDecimal("1.60"), BigDecimal("1.60"))
         )
         return ratesMap
     }

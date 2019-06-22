@@ -33,7 +33,8 @@ class PrivateRate : Mobility() {
                 Category.CABRIO to Rate(BigDecimal("4.0"), BigDecimal("4.0"), BigDecimal("0.95"), BigDecimal("0.95")),
                 Category.EMOTION to Rate(BigDecimal("4.0"), BigDecimal("4.0"), BigDecimal("0.95"), BigDecimal("0.95")),
                 Category.MINIVAN to Rate(BigDecimal("4.0"), BigDecimal("4.0"), BigDecimal("0.95"), BigDecimal("0.95")),
-                Category.TRANSPORT to Rate(BigDecimal("4.0"), BigDecimal("4.0"), BigDecimal("0.95"), BigDecimal("0.95"))
+                Category.TRANSPORT to Rate(BigDecimal("4.0"), BigDecimal("4.0"), BigDecimal("0.95"), BigDecimal("0.95")),
+                Category.PREMIUM to Rate(BigDecimal("9.0"), BigDecimal("9.0"), BigDecimal("1.50"), BigDecimal("1.50"))
         )
         return ratesMap
     }

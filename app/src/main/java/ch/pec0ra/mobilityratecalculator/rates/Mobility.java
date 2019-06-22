@@ -41,7 +41,8 @@ public abstract class Mobility {
         CABRIO,
         EMOTION,
         MINIVAN,
-        TRANSPORT
+        TRANSPORT,
+        PREMIUM
     }
 
     public enum SubscriptionType {
@@ -172,6 +173,8 @@ public abstract class Mobility {
                 return context.getString(R.string.minivan);
             case TRANSPORT:
                 return context.getString(R.string.transport);
+            case PREMIUM:
+                return context.getString(R.string.premium);
             default:
                 return context.getString(R.string.budget);
         }
@@ -197,6 +200,8 @@ public abstract class Mobility {
                 return Category.MINIVAN;
             case 8:
                 return Category.TRANSPORT;
+            case 9:
+                return Category.PREMIUM;
             default:
                 return Category.BUDGET;
         }
