@@ -29,6 +29,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,8 +39,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -50,6 +49,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.libraries.places.compat.Place;
+import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
 import com.google.maps.android.PolyUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -146,9 +147,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     private void openPlaceAutocompleteActivity(int request_code, String address) {
         try {
             Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                    .zzh(address)
                     .setBoundsBias(new LatLngBounds(switzerlandSW, switzerlandNE))
                     .build(this);
+            if (!TextUtils.isEmpty(address)) {
+                intent.putExtra("initial_query", address);
+            } else {
+                intent.removeExtra("initial_query");
+            }
             startActivityForResult(intent, request_code);
         } catch (GooglePlayServicesRepairableException e) {
             GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(), 0).show();
