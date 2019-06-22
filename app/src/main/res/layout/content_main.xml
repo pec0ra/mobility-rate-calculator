@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="@dimen/content_padding"
             android:layout_marginStart="@dimen/card_padding"
             android:layout_marginEnd="@dimen/card_padding"
@@ -108,9 +108,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="4dp"
             android:layout_marginStart="@dimen/card_padding"
             android:layout_marginEnd="@dimen/card_padding"
@@ -158,7 +158,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </FrameLayout>
