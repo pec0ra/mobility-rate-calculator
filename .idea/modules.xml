@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MobilityRateCalculator.iml" filepath="$PROJECT_DIR$/MobilityRateCalculator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mobility-rate-calculator.iml" filepath="$PROJECT_DIR$/.idea/modules/mobility-rate-calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mobility-rate-calculator.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mobility-rate-calculator.app.iml" />
     </modules>
   </component>
 </project>
