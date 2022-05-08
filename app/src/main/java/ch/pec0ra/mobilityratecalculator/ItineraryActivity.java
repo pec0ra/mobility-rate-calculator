@@ -24,20 +24,12 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,8 +41,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.libraries.places.compat.Place;
-import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.maps.android.PolyUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,8 +57,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import static ch.pec0ra.mobilityratecalculator.AnimationUtils.ANIMATION_COLOR;
 import static ch.pec0ra.mobilityratecalculator.AnimationUtils.CENTER_X_EXTRA;
@@ -145,22 +148,22 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void openPlaceAutocompleteActivity(int request_code, String address) {
-        try {
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                    .setBoundsBias(new LatLngBounds(switzerlandSW, switzerlandNE))
-                    .build(this);
-            if (!TextUtils.isEmpty(address)) {
-                intent.putExtra("initial_query", address);
-            } else {
-                intent.removeExtra("initial_query");
-            }
-            startActivityForResult(intent, request_code);
-        } catch (GooglePlayServicesRepairableException e) {
-            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(), 0).show();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            String message = "Google Play Services is not available: " + GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
-            Snackbar.make(findViewById(R.id.main_layout), message, Snackbar.LENGTH_LONG).show();
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         }
+
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+
+        // Start the autocomplete intent.
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+                .setLocationBias(RectangularBounds.newInstance(new LatLngBounds(switzerlandSW, switzerlandNE)))
+                .build(this);
+        if (!TextUtils.isEmpty(address)) {
+            intent.putExtra("initial_query", address);
+        } else {
+            intent.removeExtra("initial_query");
+        }
+        startActivityForResult(intent, request_code);
     }
 
     @Override
@@ -168,14 +171,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ORIGIN) {
             if (resultCode == RESULT_OK) {
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                Place place = Autocomplete.getPlaceFromIntent(data);
                 fromTV.setText(place.getAddress());
                 fromTV.setError(null);
                 clearMarker(ORIGIN);
                 markerA = mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(getString(R.string.origin)));
                 centerCamera();
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
                 if (status.getStatusMessage() != null) {
                     Snackbar.make(findViewById(R.id.main_layout), status.getStatusMessage(), Snackbar.LENGTH_LONG).show();
                 }
@@ -183,14 +186,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
         if (requestCode == REQUEST_CODE_DEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                Place place = Autocomplete.getPlaceFromIntent(data);
                 toTV.setText(place.getAddress());
                 toTV.setError(null);
                 clearMarker(DESTINATION);
                 markerB = mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(getString(R.string.destination)));
                 centerCamera();
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
                 if (status.getStatusMessage() != null) {
                     Snackbar.make(findViewById(R.id.main_layout), status.getStatusMessage(), Snackbar.LENGTH_LONG).show();
                 }
