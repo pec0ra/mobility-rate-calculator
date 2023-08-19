@@ -19,6 +19,8 @@
 
 package ch.pec0ra.mobilityratecalculator;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -80,7 +82,7 @@ class RateCalculator implements Serializable {
             BigDecimal highRateKmsPrice = mobilityRate.getHighKmsRate(category).multiply(new BigDecimal(highRateKms));
             BigDecimal lowRateKmsPrice = mobilityRate.getLowKmsRate(category).multiply(new BigDecimal(lowRateKms));
 
-            Price price = new Price(dayHoursPrice, nightHoursPrice, highRateKmsPrice, lowRateKmsPrice);
+            Price price = new Price(dayHoursPrice, nightHoursPrice, highRateKmsPrice, lowRateKmsPrice, mobilityRate.getAccessFee(category));
             priceMap.put(category, price);
         }
     }
@@ -113,26 +115,38 @@ class RateCalculator implements Serializable {
         endDate.setTimeInMillis(roundedEndTime);
     }
 
-    class Price implements Serializable {
+    static class Price implements Serializable {
         final BigDecimal dayHoursPrice;
         final BigDecimal nightHoursPrice;
 
         final BigDecimal highRateKmsPrice;
         final BigDecimal lowRateKmsPrice;
+        @Nullable
+        final BigDecimal accessFee;
 
-        Price(BigDecimal dayHoursPrice, BigDecimal nightHoursPrice, BigDecimal highRateKmsPrice, BigDecimal lowRateKmsPrice) {
+        Price(BigDecimal dayHoursPrice, BigDecimal nightHoursPrice, BigDecimal highRateKmsPrice, BigDecimal lowRateKmsPrice, @Nullable BigDecimal accessFee) {
             this.dayHoursPrice = dayHoursPrice;
             this.nightHoursPrice = nightHoursPrice;
             this.highRateKmsPrice = highRateKmsPrice;
             this.lowRateKmsPrice = lowRateKmsPrice;
+            this.accessFee = accessFee;
         }
 
         BigDecimal getTotalPrice() {
-            return dayHoursPrice.add(nightHoursPrice).add(highRateKmsPrice).add(lowRateKmsPrice);
+            BigDecimal price = dayHoursPrice.add(nightHoursPrice).add(highRateKmsPrice).add(lowRateKmsPrice);
+            if (accessFee != null) {
+                price = price.add(accessFee);
+            }
+            return  price;
         }
 
         BigDecimal getTimePrice() {
             return dayHoursPrice.add(nightHoursPrice);
+        }
+
+        @Nullable
+        public BigDecimal getAccessFee() {
+            return accessFee;
         }
 
         BigDecimal getDistancePrice() {

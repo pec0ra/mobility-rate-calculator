@@ -135,6 +135,14 @@ public class PricesActivity extends AppCompatActivity implements AdapterView.OnI
 
             ((TextView) v.findViewById(R.id.category_name)).setText(Mobility.categoryToString(category, getBaseContext()));
             RateCalculator.Price price = rateCalculator.getPrice(category);
+            if (price.getAccessFee() != null) {
+                v.findViewById(R.id.access_fee_title_row).setVisibility(View.VISIBLE);
+                v.findViewById(R.id.access_fee_value_row).setVisibility(View.VISIBLE);
+                ((TextView) v.findViewById(R.id.access_fee_price)).setText(getString(R.string.chf, moneyDF.format(price.getAccessFee())));
+            } else {
+                v.findViewById(R.id.access_fee_title_row).setVisibility(View.GONE);
+                v.findViewById(R.id.access_fee_value_row).setVisibility(View.GONE);
+            }
             ((TextView) v.findViewById(R.id.time_price)).setText(getString(R.string.chf, moneyDF.format(price.getTimePrice())));
             ((TextView) v.findViewById(R.id.distance_price)).setText(getString(R.string.chf, moneyDF.format(price.getDistancePrice())));
             ((TextView) v.findViewById(R.id.total_price)).setText(getString(R.string.chf, moneyDF.format(price.getTotalPrice())));
@@ -182,7 +190,7 @@ public class PricesActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        calculatePrices(fromDate, toDate, distance, Mobility.SubscriptionType.PRIVATE.getRate());
+        calculatePrices(fromDate, toDate, distance, Mobility.SubscriptionType.MEMBER.getRate());
     }
 
     private static class CalculateAsyncTask extends AsyncTask<Void, Void, Void> {

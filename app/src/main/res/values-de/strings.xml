@@ -23,6 +23,7 @@
     <string name="from">Von</string>
     <string name="to">Nach</string>
     <string name="total">Total</string>
+    <string name="access_fee">Fahrtantritt</string>
     <string name="time">Dauer</string>
     <string name="distance">Distanz</string>
     <string name="prices">Preise</string>

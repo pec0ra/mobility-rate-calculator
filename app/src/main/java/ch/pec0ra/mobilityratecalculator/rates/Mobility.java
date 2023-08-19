@@ -22,6 +22,7 @@ package ch.pec0ra.mobilityratecalculator.rates;
 import android.content.Context;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -34,25 +35,25 @@ public abstract class Mobility {
 
     public enum Category {
         BUDGET,
-        MICRO,
         ECONOMY,
-        ELECTRO,
         COMBI,
         CABRIO,
         EMOTION,
         MINIVAN,
-        TRANSPORT,
-        PREMIUM
+        TRANSPORT
     }
 
     public enum SubscriptionType {
-        PRIVATE(new PrivateRate(), 0),
-        BUSINESS(new BusinessRate(), 1),
-        CLICK_DRIVE(new ClickDriveRate(), 2),
-        BUSINESS_LITE(new BusinessLiteRate(), 3);
+        MEMBER(new MemberRate(), 0),
+        PLUS(new PlusRate(), 1),
+        YOUNG(new YoungRate(), 2),
+        LEARN(new LearnRate(), 3),
+        EASY(new EasyRate(), 4),
+        BUSINESS(new BusinessRate(), 5),
+        BUSINESS_LITE(new BusinessLiteRate(), 6);
 
         private final Mobility rate;
-        private int intValue;
+        private final int intValue;
 
         SubscriptionType(Mobility rate, int intValue) {
             this.rate = rate;
@@ -60,16 +61,22 @@ public abstract class Mobility {
         }
 
         public static SubscriptionType fromInt(int value) {
-            if (value == PRIVATE.intValue) {
-                return PRIVATE;
+            if (value == MEMBER.intValue) {
+                return MEMBER;
+            } else if (value == PLUS.intValue) {
+                return PLUS;
+            } else if (value == YOUNG.intValue) {
+                return YOUNG;
+            } else if (value == LEARN.intValue) {
+                return LEARN;
             } else if (value == BUSINESS.intValue) {
                 return BUSINESS;
-            } else if (value == CLICK_DRIVE.intValue) {
-                return CLICK_DRIVE;
+            } else if (value == EASY.intValue) {
+                return EASY;
             } else if (value == BUSINESS_LITE.intValue) {
                 return BUSINESS_LITE;
             } else {
-                return PRIVATE;
+                return MEMBER;
             }
         }
 
@@ -96,7 +103,7 @@ public abstract class Mobility {
     }
 
     @NotNull
-    private Map<Category, Rate> ratesMap;
+    private final Map<Category, Rate> ratesMap;
 
     Mobility() {
         ratesMap = initRetMap();
@@ -119,6 +126,10 @@ public abstract class Mobility {
 
     public BigDecimal getLowKmsRate(Category category) {
         return Objects.requireNonNull(ratesMap.get(category)).KMRateLow;
+    }
+
+    public BigDecimal getAccessFee(Category category) {
+        return Objects.requireNonNull(ratesMap.get(category)).accessFee;
     }
 
     public BigDecimal getHourRate(Category category, int hour) {
@@ -144,12 +155,15 @@ public abstract class Mobility {
         final BigDecimal hourlyRateNight;
         final BigDecimal KMRateHigh;
         final BigDecimal KMRateLow;
+        @Nullable
+        final BigDecimal accessFee;
 
-        Rate(BigDecimal hourlyRateDay, BigDecimal hourlyRateNight, BigDecimal kmRateHigh, BigDecimal kmRateLow) {
+        Rate(BigDecimal hourlyRateDay, BigDecimal hourlyRateNight, BigDecimal kmRateHigh, BigDecimal kmRateLow, @Nullable BigDecimal accessFee) {
             this.hourlyRateDay = hourlyRateDay;
             this.hourlyRateNight = hourlyRateNight;
             KMRateHigh = kmRateHigh;
             KMRateLow = kmRateLow;
+            this.accessFee = accessFee;
         }
     }
 
@@ -157,12 +171,8 @@ public abstract class Mobility {
         switch (category) {
             case BUDGET:
                 return context.getString(R.string.budget);
-            case MICRO:
-                return context.getString(R.string.micro);
             case ECONOMY:
                 return context.getString(R.string.economy);
-            case ELECTRO:
-                return context.getString(R.string.electro);
             case COMBI:
                 return context.getString(R.string.combi);
             case CABRIO:
@@ -173,8 +183,6 @@ public abstract class Mobility {
                 return context.getString(R.string.minivan);
             case TRANSPORT:
                 return context.getString(R.string.transport);
-            case PREMIUM:
-                return context.getString(R.string.premium);
             default:
                 return context.getString(R.string.budget);
         }
@@ -185,23 +193,17 @@ public abstract class Mobility {
             case 0:
                 return Category.BUDGET;
             case 1:
-                return Category.MICRO;
-            case 2:
                 return Category.ECONOMY;
-            case 3:
-                return Category.ELECTRO;
-            case 4:
+            case 2:
                 return Category.COMBI;
-            case 5:
+            case 3:
                 return Category.CABRIO;
-            case 6:
+            case 4:
                 return Category.EMOTION;
-            case 7:
+            case 5:
                 return Category.MINIVAN;
-            case 8:
+            case 6:
                 return Category.TRANSPORT;
-            case 9:
-                return Category.PREMIUM;
             default:
                 return Category.BUDGET;
         }

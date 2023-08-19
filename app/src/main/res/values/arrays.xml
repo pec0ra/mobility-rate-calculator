@@ -20,9 +20,12 @@
 
 <resources>
     <string-array name="spinner_array">
-        <item>Private</item>
+        <item>mobilityMEMBER</item>
+        <item>mobilityPLUS</item>
+        <item>mobilityYOUNG</item>
+        <item>mobilityLEARN</item>
+        <item>mobilityEASY</item>
         <item>Business</item>
-        <item>Click &amp; Drive</item>
-        <item>Business-Lite</item>
+        <item>Business Lite</item>
     </string-array>
 </resources>

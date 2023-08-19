@@ -22,16 +22,16 @@ package ch.pec0ra.mobilityratecalculator.rates
 import java.math.BigDecimal
 import java.util.*
 
-class BusinessRate : Mobility() {
+class EasyRate : Mobility() {
     override fun initRetMap(): HashMap<Category, Rate> {
         return hashMapOf(
-                Category.BUDGET to Rate(BigDecimal("2.00"), BigDecimal("2.00"), BigDecimal("0.55"), BigDecimal("0.55"), null),
-                Category.ECONOMY to Rate(BigDecimal("2.50"), BigDecimal("2.50"), BigDecimal("0.65"), BigDecimal("0.65"), null),
-                Category.COMBI to Rate(BigDecimal("3.00"), BigDecimal("3.00"), BigDecimal("0.80"), BigDecimal("0.80"), null),
-                Category.CABRIO to Rate(BigDecimal("4.50"), BigDecimal("4.50"), BigDecimal("1.05"), BigDecimal("1.05"), null),
-                Category.EMOTION to Rate(BigDecimal("4.50"), BigDecimal("4.50"), BigDecimal("1.05"), BigDecimal("1.05"), null),
-                Category.MINIVAN to Rate(BigDecimal("4.50"), BigDecimal("4.50"), BigDecimal("1.05"), BigDecimal("1.05"), null),
-                Category.TRANSPORT to Rate(BigDecimal("4.50"), BigDecimal("4.50"), BigDecimal("1.05"), BigDecimal("1.05"), null)
+                Category.BUDGET to Rate(BigDecimal("3"), BigDecimal("3"), BigDecimal("0.65"), BigDecimal("0.65"), BigDecimal("2.50")),
+                Category.ECONOMY to Rate(BigDecimal("3.50"), BigDecimal("3.50"), BigDecimal("0.75"), BigDecimal("0.75"), BigDecimal("2.50")),
+                Category.COMBI to Rate(BigDecimal("4"), BigDecimal("4"), BigDecimal("0.85"), BigDecimal("0.85"), BigDecimal("2.50")),
+                Category.CABRIO to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), BigDecimal("5.00")),
+                Category.EMOTION to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), BigDecimal("5.00")),
+                Category.MINIVAN to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), BigDecimal("5.00")),
+                Category.TRANSPORT to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), BigDecimal("5.00")),
         )
     }
 }

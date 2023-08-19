@@ -24,18 +24,14 @@ import java.util.*
 
 class BusinessLiteRate : Mobility() {
     override fun initRetMap(): HashMap<Category, Rate> {
-        val ratesMap = hashMapOf(
-                Category.BUDGET to Rate(BigDecimal("2.79"), BigDecimal("2.79"), BigDecimal("0.6"), BigDecimal("0.6")),
-                Category.MICRO to Rate(BigDecimal("3.25"), BigDecimal("3.25"), BigDecimal("0.7"), BigDecimal("0.7")),
-                Category.ECONOMY to Rate(BigDecimal("3.25"), BigDecimal("3.25"), BigDecimal("0.7"), BigDecimal("0.7")),
-                Category.ELECTRO to Rate(BigDecimal("3.25"), BigDecimal("3.25"), BigDecimal("0.7"), BigDecimal("0.7")),
-                Category.COMBI to Rate(BigDecimal("3.71"), BigDecimal("3.71"), BigDecimal("0.84"), BigDecimal("0.84")),
-                Category.CABRIO to Rate(BigDecimal("4.64"), BigDecimal("4.64"), BigDecimal("0.97"), BigDecimal("0.97")),
-                Category.EMOTION to Rate(BigDecimal("4.64"), BigDecimal("4.64"), BigDecimal("0.97"), BigDecimal("0.97")),
-                Category.MINIVAN to Rate(BigDecimal("4.64"), BigDecimal("4.64"), BigDecimal("0.97"), BigDecimal("0.97")),
-                Category.TRANSPORT to Rate(BigDecimal("4.64"), BigDecimal("4.64"), BigDecimal("0.97"), BigDecimal("0.97")),
-                Category.PREMIUM to Rate(BigDecimal("9.29"), BigDecimal("9.29"), BigDecimal("1.49"), BigDecimal("1.49"))
+        return hashMapOf(
+                Category.BUDGET to Rate(BigDecimal("3.00"), BigDecimal("3.00"), BigDecimal("0.65"), BigDecimal("0.65"), null),
+                Category.ECONOMY to Rate(BigDecimal("3.50"), BigDecimal("3.50"), BigDecimal("0.75"), BigDecimal("0.75"), null),
+                Category.COMBI to Rate(BigDecimal("4.00"), BigDecimal("4.00"), BigDecimal("0.90"), BigDecimal("0.90"), null),
+                Category.CABRIO to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), null),
+                Category.EMOTION to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), null),
+                Category.MINIVAN to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), null),
+                Category.TRANSPORT to Rate(BigDecimal("5.50"), BigDecimal("5.50"), BigDecimal("1.15"), BigDecimal("1.15"), null)
         )
-        return ratesMap
     }
 }

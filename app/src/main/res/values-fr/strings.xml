@@ -31,6 +31,7 @@
     <string name="time">Durée</string>
     <string name="to">À</string>
     <string name="total">Total</string>
+    <string name="access_fee">Taxe de base</string>
     <string name="two_way">Aller-Retour</string>
     <string name="to_time">À</string>
     <string name="wrong_format">Mauvais format</string>

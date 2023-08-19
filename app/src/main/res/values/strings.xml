@@ -23,6 +23,7 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="total">Total</string>
+    <string name="access_fee">Access Fee</string>
     <string name="time">Time</string>
     <string name="distance">Distance</string>
     <string name="prices">Prices</string>
