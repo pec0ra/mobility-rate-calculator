@@ -45,6 +45,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'ch.pec0ra.mobilityratecalculator'
 }
 
 dependencies {
