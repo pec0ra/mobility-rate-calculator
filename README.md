@@ -6,9 +6,6 @@ Mobility Cooperative is a company for car rental. You can find more information 
 
 This application was developed entirely by Basile Maret (pec0ra) independently of Mobility Cooperative. Mobility Cooperative will not give support for this application. You should post an issue on this github repository or contact the developer if you have a problem with the application instead of contacting Mobility.
 
-## Build instruction
-Before building, you have to edit the file `src/main/java/ch/pec0ra/mobilityratecalculator/MapsDistances.java` and fill in `distancesKey`, `directionsKey` and `staticMapKey` with your Google Maps API keys for [Distance Matrix](https://developers.google.com/maps/documentation/distance-matrix/), [Directions](https://developers.google.com/maps/documentation/directions/) and [Static Maps](https://developers.google.com/maps/documentation/static-maps/)
-
 ## License
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
