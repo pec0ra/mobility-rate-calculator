@@ -24,6 +24,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_layout"
     android:background="@android:color/background_light"
+    android:fitsSystemWindows="true"
     tools:context="ch.pec0ra.mobilityratecalculator.ItineraryActivity">
 
     <LinearLayout
